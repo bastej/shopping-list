@@ -1,6 +1,7 @@
 {
   "name": "react-complete-guide",
   "version": "0.1.0",
+  "homepage": "https://bastej.github.io/shopping-list",
   "repository": {
     "type": "git",
     "url": "https://github.com/bastej/react-shopping-list.git"
@@ -17,6 +18,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.1.3",
     "datalist-polyfill": "^1.22.2",
+    "gh-pages": "^2.0.1",
     "jquery": "^3.3.1",
     "lodash": "^4.17.11",
     "node-sass": "^4.10.0",
@@ -35,6 +37,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "browserslist": [

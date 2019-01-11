@@ -37,25 +37,25 @@ class SingleList extends Component {
       <table className="table table-primary">
         <thead>
           <tr className="bg-primary">
-            <th scope="col">Products nutrients</th>
-            <th scope="col" />
+            <th scope="col">Nutrients of products</th>
+            <th scope="col">Total value</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td scope="row">Total calories</td>
+            <td scope="row">Calories</td>
             <td>{calories.toFixed(1)}</td>
           </tr>
           <tr>
-            <td scope="row">Total carbohydrates</td>
+            <td scope="row">Carbohydrates</td>
             <td>{carbohydrates.toFixed(1)}</td>
           </tr>
           <tr>
-            <td scope="row">Total proteins</td>
+            <td scope="row">Proteins</td>
             <td>{proteins.toFixed(1)}</td>
           </tr>
           <tr>
-            <td scope="row">Total fats</td>
+            <td scope="row">Fats</td>
             <td>{fats.toFixed(1)}</td>
           </tr>
         </tbody>
