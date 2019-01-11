@@ -43,11 +43,21 @@
       box-shadow: 9px 10px 46px -15px rgba(200,200,200,1)
       transition: all ease-in-out 200ms
       cursor: pointer
+      background-blend-mode: lighten
+      background-repeat: no-repeat !important
+      background-color: rgba(255,255,255,0.6) !important
+      background-position: top center !important
       &:hover
         transition: all ease-in-out 200ms
         -webkit-box-shadow: unset
         -moz-box-shadow: unset
         box-shadow: unset
+      .productImg
+        width: auto;
+        height: 70px;
+        max-width: 100%;
+        display: block;
+        margin: 10px auto;
       .name
         font-weight: bold
         margin: 10px

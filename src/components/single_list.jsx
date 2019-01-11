@@ -121,69 +121,71 @@ class SingleList extends Component {
     return (
       <div className="singleList">
         <Navbar list={list} />
-        <div className="row">
-          <div className="col">
-            <form
-              onSubmit={handleSubmit(this.onSubmit.bind(this))}
-              className="form-group"
-            >
-              <Field
-                component={this.renderField}
-                name="count"
-                placeholder="Set count"
-              />
-              <Field
-                component={this.renderField}
-                list="categories"
-                name="category"
-                placeholder="Choose category"
-              />
-              {/* <Field
+        <div className="container">
+          <div className="row">
+            <div className="col">
+              <form
+                onSubmit={handleSubmit(this.onSubmit.bind(this))}
+                className="form-group"
+              >
+                <Field
+                  component={this.renderField}
+                  name="count"
+                  placeholder="Set count"
+                />
+                <Field
+                  component={this.renderField}
+                  list="categories"
+                  name="category"
+                  placeholder="Choose category"
+                />
+                {/* <Field
                 component={this.renderField}
                 list="products"
                 name="name"
                 placeholder="Text product name"
               /> */}
-              <ProductSearch />
+                <ProductSearch />
 
-              {/* <label htmlFor="products">
+                {/* <label htmlFor="products">
                 <select id="products">
                   {_.map(products, product => {
                     return <option key={product.id} value={product.name} />;
                   })}
                 </select>
               </label>*/}
-              <datalist id="categories" style={{ width: "100%" }}>
-                {_.map(categories, category => {
-                  return <option key={category.id} value={category.name} />;
-                })}
-              </datalist>
+                <datalist id="categories" style={{ width: "100%" }}>
+                  {_.map(categories, category => {
+                    return <option key={category.id} value={category.name} />;
+                  })}
+                </datalist>
 
-              <button className="btn btn-success" type="submit">
-                Add to List
-              </button>
-            </form>
+                <button className="btn btn-success" type="submit">
+                  Add to List
+                </button>
+              </form>
+            </div>
           </div>
-        </div>
-        <div className="row productsList">
-          <div className="col">
-            <ul className="list-group">
-              {_.map(list.productsList, product => {
-                let match = _.find(categories, { name: product.category });
-                return (
-                  <Product
-                    key={product.id}
-                    product={product}
-                    list={list}
-                    match={match}
-                  />
-                );
-              })}
-            </ul>
+          <div className="row productsList">
+            <div className="col">
+              <ul className="list-group">
+                {_.map(list.productsList, product => {
+                  let match = _.find(categories, { name: product.category });
+                  return (
+                    <Product
+                      key={product.id}
+                      product={product}
+                      list={list}
+                      match={match}
+                    />
+                  );
+                })}
+              </ul>
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col">{this.sumNutrients()}</div>
+          <div className="row">
+            <div className="col">{this.sumNutrients()}</div>
+          </div>
         </div>
       </div>
     );

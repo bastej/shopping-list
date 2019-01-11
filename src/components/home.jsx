@@ -103,13 +103,20 @@ class Home extends Component {
                   data-category={product.category}
                   className="col-12 col-md-6 col-lg-3"
                 >
-                  <div className="product">
+                  <div
+                    className="product"
+                    style={
+                      product.photo && {
+                        background: "url(" + product.photo + ")"
+                      }
+                    }
+                  >
                     <div className="badge badge-success badge-times">
                       {product.usageCount} <br /> times
                     </div>
-                    {product.photo && (
+                    {/* {product.photo && (
                       <img className="productImg" src={product.photo} />
-                    )}
+                    )} */}
                     <h5 className="name">{product.name} </h5>
                     <div className="badge badge-category">
                       {product.category + " "}

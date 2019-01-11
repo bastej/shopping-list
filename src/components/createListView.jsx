@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createNewList } from "../actions";
 import { Link } from "react-router-dom";
+import Navbar from "./navbar";
 
 class CreateListView extends Component {
   state = {
@@ -23,22 +24,27 @@ class CreateListView extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container m-3">
-          <div className="row">
-            <div className="col-3">
-              <input
-                onChange={this.updateNewListName}
-                className="input-group m-2"
-                type="text"
-                placeholder="Text here list name..."
-              />
-              <button
-                onClick={() => this.props.createNewList(this.state.newListName)}
-                className="btn btn-primary"
-              >
-                NEW
-              </button>
-              <Link to="/">Back to home</Link>
+        <Navbar />
+        <div className="container">
+          <div className="container m-3">
+            <div className="row">
+              <div className="col-3">
+                <input
+                  onChange={this.updateNewListName}
+                  className="input-group m-2"
+                  type="text"
+                  placeholder="Text here list name..."
+                />
+                <button
+                  onClick={() =>
+                    this.props.createNewList(this.state.newListName)
+                  }
+                  className="btn btn-primary"
+                >
+                  NEW
+                </button>
+                <Link to="/">Back to home</Link>
+              </div>
             </div>
           </div>
         </div>
