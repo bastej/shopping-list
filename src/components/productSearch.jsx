@@ -14,6 +14,10 @@ class productSearch extends Component {
     selected: ""
   };
 
+  componentDidUpdate() {
+    this.state.selected && (document.querySelector("input#productSearch").value = this.state.selected)
+  }
+
   onInputChange = query => {
     console.log("zapytanie do API");
     if (query.length) {
@@ -43,11 +47,8 @@ class productSearch extends Component {
     });
   }
 
-  selectProduct = value => {
-    document.querySelector("input#productSearch").value = value;
-  };
-
-  setSelected = () => {
+  setSelected = (value) => {
+    this.setState({ selected: value });
     this.setState({ foods: "" });
   };
 
@@ -77,7 +78,7 @@ class productSearch extends Component {
               return (
                 <li
                   onClick={e => this.setSelected(e.target.textContent)}
-                  onMouseOver={e => this.selectProduct(e.target.textContent)}
+                  // onMouseOver={e => this.selectProduct(e.target.textContent)}
                   key={index}
                   role="option"
                   id={"listbox-" + index}

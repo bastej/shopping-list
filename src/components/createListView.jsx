@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import "./styles/createListView.css";
+import "./styles/createListView.sass";
 import { connect } from "react-redux";
 import { createNewList } from "../actions";
 import { Link } from "react-router-dom";
@@ -23,32 +23,37 @@ class CreateListView extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className="createNewList">
         <Navbar />
-        <div className="container">
-          <div className="container m-3">
+          <div className="container">
             <div className="row">
-              <div className="col-3">
-                <input
-                  onChange={this.updateNewListName}
-                  className="input-group m-2"
-                  type="text"
-                  placeholder="Text here list name..."
-                />
-                <button
-                  onClick={() =>
-                    this.props.createNewList(this.state.newListName)
-                  }
-                  className="btn btn-primary"
-                >
-                  NEW
-                </button>
-                <Link to="/">Back to home</Link>
+              <div className="col-6 offset-3">
+                <div className="card">
+                  <div className="card-header bg-secondary text-white">
+                    <h4>Create new list</h4>
+                  </div>
+                  <div className="card-body">
+                    <input
+                      onChange={this.updateNewListName}
+                      className="form-control m-2"
+                      type="text"
+                      placeholder="Text here list name..."
+                    />
+                    <button
+                      onClick={() =>
+                        this.props.createNewList(this.state.newListName)
+                      }
+                      className="btn btn-outline-success btn-lg btn-block"
+                    >
+                      Create
+                    </button>
+                  </div>
+                </div>
+                  
               </div>
             </div>
           </div>
-        </div>
-      </React.Fragment>
+      </div>
     );
   }
 }

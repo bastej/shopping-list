@@ -3,7 +3,7 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { Route, Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./styles/navbar.css";
+import "./styles/navbar.sass";
 
 class Navbar extends Component {
   componentDidMount() {
@@ -14,18 +14,22 @@ class Navbar extends Component {
     const { list, lists } = this.props;
     return (
       <div>
-        <nav className="navbar navbar-dark bg-dark">
+        <nav className="navbar navbar-dark bg-dark text-white">
           <div className="container">
-            <NavLink exact to={"/"} className="btn btn-warning goHomeBtn">
-              <FontAwesomeIcon className="fa-lg" icon="home" /> Go Home
+            <NavLink exact to={"/"} className="btn btn-primary goHomeBtn">
+              <FontAwesomeIcon className="fa-lg" icon="home" /> <span>Go Home</span>
             </NavLink>
+            <Route exact path={"/"} render={ () => (
+                <span className="pageHeader navbar-brand">Shopping list App</span>
+              )
+            }></Route>
             <Route
               exact
               path={"/lists/:id"}
               render={router => (
                 <a href="#" className="navbar-brand abs">
-                  {list.title + " "}
-                  <span className="badge badge-pill badge-info">
+                  <span className="pageHeader">{list.title + " "}</span>
+                  <span className="badge badge-pill badge-warning">
                     {_.size(list.productsList)}
                   </span>
                   {/* {console.log("navbar/ props: " + props)} */}
@@ -37,15 +41,16 @@ class Navbar extends Component {
               path={"/lists"}
               render={() => (
                 <a href="#" className="navbar-brand abs">
-                  All lists{" "}
-                  <span className="badge badge-pill badge-info">
+                  <span className="pageHeader">All lists{" "}</span>
+                  <span className="badge badge-pill badge-warning">
                     {_.size(lists)}
                   </span>
+                  
                 </a>
               )}
             />
-            <NavLink exact to={"/lists"} className="btn btn-warning allListBtn">
-              <FontAwesomeIcon icon="shopping-basket" /> All lists
+            <NavLink exact to={"/lists"} className="btn btn-primary allListBtn">
+              <FontAwesomeIcon icon="shopping-basket" /> <span>All lists</span>
             </NavLink>
           </div>
         </nav>

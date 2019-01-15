@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import { deleteList } from "../actions";
 import { connect } from "react-redux";
 import Navbar from "./navbar";
+import "./styles/allLists.sass"
 
 class Home extends Component {
   render() {
     const { lists, deleteList } = this.props;
     return (
-      <React.Fragment>
+      <div className="allLists">
         <Navbar lists={lists} />
         <div className="container">
           <div className="row">
@@ -18,14 +19,14 @@ class Home extends Component {
               <ul className="list-group">
                 {_.map(lists, (list, index) => {
                   return (
-                    <li key={list.id} className="list-group-item">
+                    <li key={list.id} className="list-group-item bg-light">
                       <Link to={`/lists/${list.id}`}>
-                        {index + 1}. {list.title}{" "}
+                        <h4>{list.title}{" "}</h4>
                       </Link>
                       <div className="badge badge-warning">
                         Products: {_.size(list.productsList)}
                       </div>
-                      <div>Data utworzenia: {list.createDate}</div>
+                      <div>Creation date: {list.createDate}</div>
                       <button
                         onClick={() => deleteList(list.id)}
                         className="btn btn-danger float-right"
@@ -39,7 +40,7 @@ class Home extends Component {
             </div>
           </div>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }

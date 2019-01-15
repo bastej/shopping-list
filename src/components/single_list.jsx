@@ -34,9 +34,9 @@ class SingleList extends Component {
       product.fats && (fats += product.fats * product.count);
     });
     return (
-      <table className="table table-primary">
+      <table className="table table-secondary">
         <thead>
-          <tr className="bg-primary">
+          <tr className="bg-secondary text-white">
             <th scope="col">Nutrients of products</th>
             <th scope="col">Total value</th>
           </tr>
@@ -124,46 +124,50 @@ class SingleList extends Component {
         <div className="container">
           <div className="row">
             <div className="col">
-              <form
-                onSubmit={handleSubmit(this.onSubmit.bind(this))}
-                className="form-group"
-              >
-                <Field
-                  component={this.renderField}
-                  name="count"
-                  placeholder="Set count"
-                />
-                <Field
-                  component={this.renderField}
-                  list="categories"
-                  name="category"
-                  placeholder="Choose category"
-                />
-                {/* <Field
-                component={this.renderField}
-                list="products"
-                name="name"
-                placeholder="Text product name"
-              /> */}
-                <ProductSearch />
+              <div className="card bg-light">
+                <div className="card-body">
+                  <form
+                  onSubmit={handleSubmit(this.onSubmit.bind(this))}
+                  className="form-group"
+                >
+                    <Field
+                      component={this.renderField}
+                      name="count"
+                      placeholder="Set count"
+                    />
+                    <Field
+                      component={this.renderField}
+                      list="categories"
+                      name="category"
+                      placeholder="Choose category"
+                    />
+                    {/* <Field
+                    component={this.renderField}
+                    list="products"
+                    name="name"
+                    placeholder="Text product name"
+                  /> */}
+                    <ProductSearch />
 
-                {/* <label htmlFor="products">
-                <select id="products">
-                  {_.map(products, product => {
-                    return <option key={product.id} value={product.name} />;
-                  })}
-                </select>
-              </label>*/}
-                <datalist id="categories" style={{ width: "100%" }}>
-                  {_.map(categories, category => {
-                    return <option key={category.id} value={category.name} />;
-                  })}
-                </datalist>
+                    {/* <label htmlFor="products">
+                    <select id="products">
+                      {_.map(products, product => {
+                        return <option key={product.id} value={product.name} />;
+                      })}
+                    </select>
+                  </label>*/}
+                    <datalist id="categories" style={{ width: "100%" }}>
+                      {_.map(categories, category => {
+                        return <option key={category.id} value={category.name} />;
+                      })}
+                    </datalist>
 
-                <button className="btn btn-success" type="submit">
-                  Add to List
-                </button>
-              </form>
+                    <button className="btn btn-outline-success btn-block font-weight-bold" type="submit">
+                      Add to List
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
           <div className="row productsList">

@@ -8,7 +8,7 @@ const Product = props => {
   const { product, match, list } = props;
 
   return (
-    <li className="list-group-item product">
+    <li className="list-group-item bg-light product">
       <div className="badge badge-warning">{product.count}</div>
       {product.photo && <img className="productImg" src={product.photo} />}
       <span className="name">{" " + product.name}</span>
@@ -81,7 +81,7 @@ const Product = props => {
 
       <button
         onClick={() => props.deleteProduct(list.id, product.id)}
-        className="btn btn-md btn-danger deleteBtn float-right"
+        className="btn btn-sm btn-outline-danger deleteBtn float-right"
       >
         <FontAwesomeIcon className="fa-md" icon="times" />
       </button>
@@ -90,7 +90,7 @@ const Product = props => {
           onClick={() =>
             props.updateProductCount(list.id, product.id, "increment")
           }
-          className="btn btn-md btn-primary"
+          className="btn btn-sm btn-outline-primary"
         >
           <FontAwesomeIcon className="fa-md" icon="angle-up" />
         </button>
@@ -98,7 +98,7 @@ const Product = props => {
           onClick={() =>
             props.updateProductCount(list.id, product.id, "decrement")
           }
-          className="btn btn-md btn-primary"
+          className="btn btn-sm btn-outline-primary"
         >
           <FontAwesomeIcon className="fa-md" icon="angle-down" />
         </button>

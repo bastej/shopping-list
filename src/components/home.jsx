@@ -34,7 +34,7 @@ class Home extends Component {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <Link to="/createList" className="btn btn-success btnAddList">
+              <Link to="/createList" className="btn btn-success btn-lg btn-block btnAddList">
                 <FontAwesomeIcon className="fa-sm" icon="plus" /> Create new
                 list
               </Link>
@@ -47,9 +47,8 @@ class Home extends Component {
             {_.map(lists, list => {
               return (
                 <div key={list.id} className="col-12 col-lg-4">
-                  <div className="homeListTile">
-                    <Link to={`/lists/${list.id}`}>
-                      <h3>{list.title}</h3>
+                  <div className="homeListTile bg-light">
+                      <h4>{list.title}</h4>
                       <hr />
                       <div className="badge badge-warning">
                         Products: {_.size(list.productsList) || 0}{" "}
@@ -58,10 +57,6 @@ class Home extends Component {
                         <FontAwesomeIcon className="fa-sm" icon="calendar" />{" "}
                         {list.createDate}
                       </div>
-                      <div className="badge badge-success">
-                        nutritional values
-                      </div>
-                    </Link>
                     <button
                       onClick={() => deleteList(list.id)}
                       className="btn btn-sm btn-danger btnDelete"
@@ -69,15 +64,9 @@ class Home extends Component {
                     >
                       <FontAwesomeIcon className="fa-md" icon="times" />
                     </button>
-                    <button
-                      onClick={() => deleteList(list.id)}
-                      className="btn btn-lg btnPreviewCategory"
-                    >
-                      <FontAwesomeIcon
-                        className="fa-lg"
-                        icon="shopping-basket"
-                      />
-                    </button>
+                    <Link to={`/lists/${list.id}`} className="btn btn-outline-primary btn-block btnOpenList">
+                      Open list
+                    </Link>
                     <div>
                       {/* kcal: {product.calories} | w: {product.carbohydrates} | b:{" "}
                     {product.proteins} | t: {product.fats} */}
@@ -111,13 +100,13 @@ class Home extends Component {
                       }
                     }
                   >
-                    <div className="badge badge-success badge-times">
+                    <div className="badge badge-info badge-times">
                       {product.usageCount} <br /> times
                     </div>
                     {/* {product.photo && (
                       <img className="productImg" src={product.photo} />
                     )} */}
-                    <h5 className="name">{product.name} </h5>
+                    <h6 className="name">{product.name} </h6>
                     <div className="badge badge-category">
                       {product.category + " "}
                       <img src={match.img} className="categoryImg" />
@@ -138,16 +127,16 @@ class Home extends Component {
                               w {product.serving_weight_grams || "--"} g/ml
                             </div>
                             <div className="nutrients_kcal">
-                              cal: {product.calories || "--"}
+                              cal: {product.calories || "0"}
                             </div>
                             <div className="nutrients_w">
-                              c: {product.carbohydrates || "--"}
+                              c: {product.carbohydrates || "0"}
                             </div>
                             <div className="nutrients_b">
-                              p: {product.proteins || "--"}
+                              p: {product.proteins || "0"}
                             </div>
                             <div className="nutrients_t">
-                              f: {product.fats || "--"}
+                              f: {product.fats || "0"}
                             </div>
                           </div>
                         </div>

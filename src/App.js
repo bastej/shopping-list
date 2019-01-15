@@ -18,7 +18,8 @@ import {
 import CreateListView from "./components/createListView";
 import SingleList from "./components/single_list";
 import allLists from "./components/allLists";
-import "./components/styles/globalStyle.css";
+import Footer from "./components/footer";
+import "./components/styles/globalStyle.sass";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 library.add(
@@ -43,6 +44,7 @@ class App extends Component {
               <Route path="/createList" component={CreateListView} />
               <Route path="/" component={Home} />
             </Switch>
+            {/* <Footer/> */}
           </main>
         </React.Fragment>
       </BrowserRouter>
