@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { Link } from "react-router-dom";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, reset } from "redux-form";
 import { connect } from "react-redux";
 import { addProduct, addCategory } from "../actions";
 import Navbar from "./navbar";
@@ -104,6 +104,7 @@ class SingleList extends Component {
   onSubmit(values) {
     this.props.addProduct(values, this.props.match.params.id);
     this.props.addCategory(values.category);
+    this.props.reset("ProductsNewForm")
   }
 
   render() {
@@ -129,6 +130,7 @@ class SingleList extends Component {
                   <form
                   onSubmit={handleSubmit(this.onSubmit.bind(this))}
                   className="form-group"
+                  id="test1"
                 >
                     <Field
                       component={this.renderField}
@@ -162,7 +164,7 @@ class SingleList extends Component {
                       })}
                     </datalist>
 
-                    <button className="btn btn-outline-success btn-block font-weight-bold" type="submit">
+                    <button className="btn btn-success btn-block font-weight-bold" type="submit">
                       Add to List
                     </button>
                   </form>
@@ -231,7 +233,8 @@ export default reduxForm({
     mapStateToProps,
     {
       addProduct,
-      addCategory
+      addCategory,
+      reset
     }
   )(SingleList)
 );

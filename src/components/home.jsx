@@ -64,7 +64,7 @@ class Home extends Component {
                     >
                       <FontAwesomeIcon className="fa-md" icon="times" />
                     </button>
-                    <Link to={`/lists/${list.id}`} className="btn btn-outline-primary btn-block btnOpenList">
+                    <Link to={`/lists/${list.id}`} className="btn btn-primary btn-block btnOpenList">
                       Open list
                     </Link>
                     <div>

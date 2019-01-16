@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "./styles/productSearch.sass";
 import _ from "lodash";
 import axios from "axios";
-import { Field } from "redux-form";
+import { Field, change } from "redux-form";
+import { connect } from "react-redux";
 
 const API_KEY = "66dc95ac590ef97c7de66e82397a3853";
 const APP_KEY = "6bbdffac";
@@ -10,13 +11,8 @@ const ROOT_URL = "https://trackapi.nutritionix.com/v2/search/instant";
 
 class productSearch extends Component {
   state = {
-    foods: "",
-    selected: ""
+    foods: ""
   };
-
-  componentDidUpdate() {
-    this.state.selected && (document.querySelector("input#productSearch").value = this.state.selected)
-  }
 
   onInputChange = query => {
     console.log("zapytanie do API");
@@ -48,7 +44,10 @@ class productSearch extends Component {
   }
 
   setSelected = (value) => {
-    this.setState({ selected: value });
+    // this.setState({ selected: value })
+    this.props.change("ProductsNewForm", 'name', value);
+    // this.state.selected && (document.querySelector("input#productSearch").value = this.state.selected)
+    // alert("state val" + this.state.selected + "przekazane do fnkc" + value + "pole" + document.querySelector("input#productSearch").value)
     this.setState({ foods: "" });
   };
 
@@ -94,6 +93,7 @@ class productSearch extends Component {
   };
 
   render() {
+    alert("rendering...")
     const onInputChange = _.debounce(query => {
       this.onInputChange(query);
     }, 800);
@@ -110,4 +110,4 @@ class productSearch extends Component {
   }
 }
 
-export default productSearch;
+export default connect(null, {change})(productSearch);

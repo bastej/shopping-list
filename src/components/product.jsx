@@ -81,7 +81,7 @@ const Product = props => {
 
       <button
         onClick={() => props.deleteProduct(list.id, product.id)}
-        className="btn btn-sm btn-outline-danger deleteBtn float-right"
+        className="btn btn-sm btn-danger deleteBtn float-right"
       >
         <FontAwesomeIcon className="fa-md" icon="times" />
       </button>
@@ -90,7 +90,7 @@ const Product = props => {
           onClick={() =>
             props.updateProductCount(list.id, product.id, "increment")
           }
-          className="btn btn-sm btn-outline-primary"
+          className="btn btn-sm btn-primary"
         >
           <FontAwesomeIcon className="fa-md" icon="angle-up" />
         </button>
@@ -98,7 +98,7 @@ const Product = props => {
           onClick={() =>
             props.updateProductCount(list.id, product.id, "decrement")
           }
-          className="btn btn-sm btn-outline-primary"
+          className="btn btn-sm btn-primary"
         >
           <FontAwesomeIcon className="fa-md" icon="angle-down" />
         </button>

@@ -27,7 +27,7 @@ class CreateListView extends Component {
         <Navbar />
           <div className="container">
             <div className="row">
-              <div className="col-6 offset-3">
+              <div className="col-lg-6 col-md-12 offset-lg-3">
                 <div className="card">
                   <div className="card-header bg-secondary text-white">
                     <h4>Create new list</h4>
@@ -43,7 +43,7 @@ class CreateListView extends Component {
                       onClick={() =>
                         this.props.createNewList(this.state.newListName)
                       }
-                      className="btn btn-outline-success btn-lg btn-block"
+                      className="btn btn-success btn-lg btn-block"
                     >
                       Create
                     </button>
