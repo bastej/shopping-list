@@ -93,7 +93,7 @@ class productSearch extends Component {
   };
 
   render() {
-    alert("rendering...")
+    // alert("rendering...")
     const onInputChange = _.debounce(query => {
       this.onInputChange(query);
     }, 800);
