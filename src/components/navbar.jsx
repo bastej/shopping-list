@@ -14,7 +14,7 @@ class Navbar extends Component {
     const { list, lists } = this.props;
     return (
       <div>
-        <nav className="navbar navbar-dark bg-dark text-white">
+        <nav className="navbar navbar-dark text-white">
           <div className="container">
             <NavLink exact to={"/"} className="btn btn-primary goHomeBtn">
               <FontAwesomeIcon className="fa-lg" icon="home" /> <span>Go Home</span>
@@ -49,7 +49,7 @@ class Navbar extends Component {
                 </a>
               )}
             />
-            <NavLink exact to={"/lists"} className="btn btn-primary allListBtn">
+            <NavLink exact to={"/lists"} className="btn btn-outline-green allListBtn">
               <FontAwesomeIcon icon="shopping-basket" /> <span>All lists</span>
             </NavLink>
           </div>

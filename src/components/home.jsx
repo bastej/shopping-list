@@ -32,14 +32,9 @@ class Home extends Component {
       <div className="home">
         <Navbar />
         <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <Link to="/createList" className="btn btn-success btn-lg btn-block btnAddList">
-                <FontAwesomeIcon className="fa-sm" icon="plus" /> Create new
-                list
-              </Link>
-            </div>
-          </div>
+          <Link to="/createList" className="btn btn-green btnAddList text-white font-weight-bold">
+            <p>Create new list</p><FontAwesomeIcon className="fa-lg" icon="plus" />
+          </Link>
           <div className="row">
             <div className="col-12">
               <h3>Recent lists:</h3>
@@ -47,7 +42,7 @@ class Home extends Component {
             {_.map(lists, list => {
               return (
                 <div key={list.id} className="col-12 col-lg-4">
-                  <div className="homeListTile bg-light">
+                  <div className="homeListTile">
                       <h4>{list.title}</h4>
                       <hr />
                       <div className="badge badge-warning">
@@ -59,12 +54,12 @@ class Home extends Component {
                       </div>
                     <button
                       onClick={() => deleteList(list.id)}
-                      className="btn btn-sm btn-danger btnDelete"
+                      className="btn btn-sm btn-outline-lightgreen btnDelete"
                       title="Delete"
                     >
                       <FontAwesomeIcon className="fa-md" icon="times" />
                     </button>
-                    <Link to={`/lists/${list.id}`} className="btn btn-primary btn-block btnOpenList">
+                    <Link to={`/lists/${list.id}`} className="btn btn-green btn-block btnOpenList">
                       Open list
                     </Link>
                     <div>
@@ -101,7 +96,7 @@ class Home extends Component {
                     }
                   >
                     <div className="badge badge-info badge-times">
-                      {product.usageCount} <br /> times
+                      x {product.usageCount} 
                     </div>
                     {/* {product.photo && (
                       <img className="productImg" src={product.photo} />
