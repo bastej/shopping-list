@@ -25,34 +25,33 @@ class CreateListView extends Component {
     return (
       <div className="createNewList">
         <Navbar />
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-6 col-md-12 offset-lg-3">
-                <div className="card">
-                  <div className="card-header bg-secondary text-white">
-                    <h4>Create new list</h4>
-                  </div>
-                  <div className="card-body">
-                    <input
-                      onChange={this.updateNewListName}
-                      className="form-control m-2"
-                      type="text"
-                      placeholder="Text here list name..."
-                    />
-                    <button
-                      onClick={() =>
-                        this.props.createNewList(this.state.newListName)
-                      }
-                      className="btn btn-success btn-lg btn-block"
-                    >
-                      Create
-                    </button>
-                  </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-6 col-md-12 offset-lg-3">
+              <div className="card">
+                <div className="card-header bg-lightBlue text-white">
+                  <h4>Create new list</h4>
                 </div>
-                  
+                <div className="card-body">
+                  <input
+                    onChange={this.updateNewListName}
+                    className="form-control m-2"
+                    type="text"
+                    placeholder="Text here list name..."
+                  />
+                  <button
+                    onClick={() =>
+                      this.props.createNewList(this.state.newListName)
+                    }
+                    className="btn btn-green btn-lg btn-block"
+                  >
+                    Create
+                  </button>
+                </div>
               </div>
             </div>
           </div>
+        </div>
       </div>
     );
   }
