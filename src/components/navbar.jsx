@@ -16,13 +16,19 @@ class Navbar extends Component {
       <div>
         <nav className="navbar navbar-dark text-white">
           <div className="container">
-            <NavLink exact to={"/"} className="btn btn-primary goHomeBtn">
-              <FontAwesomeIcon className="fa-lg" icon="home" /> <span>Go Home</span>
+            <NavLink exact to={"/"} className="btn btn-outline-green goHomeBtn">
+              <FontAwesomeIcon className="fa-lg" icon="home" />{" "}
+              <span>Go Home</span>
             </NavLink>
-            <Route exact path={"/"} render={ () => (
-                <span className="pageHeader navbar-brand">Shopping list App</span>
-              )
-            }></Route>
+            <Route
+              exact
+              path={"/"}
+              render={() => (
+                <span className="pageHeader navbar-brand">
+                  Shopping list App
+                </span>
+              )}
+            />
             <Route
               exact
               path={"/lists/:id"}
@@ -41,15 +47,18 @@ class Navbar extends Component {
               path={"/lists"}
               render={() => (
                 <a href="#" className="navbar-brand abs">
-                  <span className="pageHeader">All lists{" "}</span>
+                  <span className="pageHeader">All lists </span>
                   <span className="badge badge-pill badge-warning">
                     {_.size(lists)}
                   </span>
-                  
                 </a>
               )}
             />
-            <NavLink exact to={"/lists"} className="btn btn-outline-green allListBtn">
+            <NavLink
+              exact
+              to={"/lists"}
+              className="btn btn-outline-green allListBtn"
+            >
               <FontAwesomeIcon icon="shopping-basket" /> <span>All lists</span>
             </NavLink>
           </div>
