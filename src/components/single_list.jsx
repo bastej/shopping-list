@@ -34,28 +34,36 @@ class SingleList extends Component {
       product.fats && (fats += product.fats * product.count);
     });
     return (
-      <table className="table table-secondary">
+      <table className="table bg-white sumNutrientsTable">
         <thead>
-          <tr className="bg-secondary text-white">
+          <tr className="bg-lightBlue text-white">
             <th scope="col">Nutrients of products</th>
             <th scope="col">Total value</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td scope="row">Calories</td>
+            <td scope="row" className="font-weight-bold">
+              Calories
+            </td>
             <td>{calories.toFixed(1)}</td>
           </tr>
           <tr>
-            <td scope="row">Carbohydrates</td>
+            <td scope="row" className="font-weight-bold">
+              Carbohydrates
+            </td>
             <td>{carbohydrates.toFixed(1)}</td>
           </tr>
           <tr>
-            <td scope="row">Proteins</td>
+            <td scope="row" className="font-weight-bold">
+              Proteins
+            </td>
             <td>{proteins.toFixed(1)}</td>
           </tr>
           <tr>
-            <td scope="row">Fats</td>
+            <td scope="row" className="font-weight-bold">
+              Fats
+            </td>
             <td>{fats.toFixed(1)}</td>
           </tr>
         </tbody>
@@ -104,7 +112,7 @@ class SingleList extends Component {
   onSubmit(values) {
     this.props.addProduct(values, this.props.match.params.id);
     this.props.addCategory(values.category);
-    this.props.reset("ProductsNewForm")
+    this.props.reset("ProductsNewForm");
   }
 
   render() {
@@ -125,13 +133,13 @@ class SingleList extends Component {
         <div className="container">
           <div className="row">
             <div className="col">
-              <div className="card bg-light">
+              <div className="card">
                 <div className="card-body">
                   <form
-                  onSubmit={handleSubmit(this.onSubmit.bind(this))}
-                  className="form-group"
-                  id="test1"
-                >
+                    onSubmit={handleSubmit(this.onSubmit.bind(this))}
+                    className="form-group"
+                    id="test1"
+                  >
                     <Field
                       component={this.renderField}
                       name="count"
@@ -160,11 +168,16 @@ class SingleList extends Component {
                   </label>*/}
                     <datalist id="categories" style={{ width: "100%" }}>
                       {_.map(categories, category => {
-                        return <option key={category.id} value={category.name} />;
+                        return (
+                          <option key={category.id} value={category.name} />
+                        );
                       })}
                     </datalist>
 
-                    <button className="btn btn-success btn-block font-weight-bold" type="submit">
+                    <button
+                      className="btn btn-green btn-block font-weight-bold"
+                      type="submit"
+                    >
                       Add to List
                     </button>
                   </form>
