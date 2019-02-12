@@ -1,0 +1,160 @@
+@import "./styles/colors";
+
+//single list products style
+.product {
+  padding: 30px;
+  border: 1px solid #eee;
+  border-radius: 15px;
+  text-align: center;
+  margin: 20px;
+  position: relative;
+  -webkit-box-shadow: 9px 10px 46px -15px rgba(200, 200, 200, 1);
+  -moz-box-shadow: 9px 10px 46px -15px rgba(200, 200, 200, 1);
+  box-shadow: 9px 10px 46px -15px rgba(200, 200, 200, 1);
+  transition: all ease-in-out 200ms;
+  cursor: pointer;
+  background-blend-mode: lighten;
+  background-repeat: no-repeat !important;
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  background-position: top center !important;
+  &:hover {
+    transition: all ease-in-out 200ms;
+    -webkit-box-shadow: unset;
+    -moz-box-shadow: unset;
+    box-shadow: unset;
+  }
+  .productImg {
+    width: auto;
+    height: 70px;
+    max-width: 100%;
+    display: block;
+    margin: 10px auto;
+  }
+  .name {
+    font-weight: bold;
+    margin: 10px;
+    color: #444444;
+  }
+  .nutrientsSwitch {
+    margin: 8px auto;
+    color: $darkGreen;
+  }
+  .nutrients {
+    height: 0;
+    border-top: 1px solid $lightBlue;
+    padding-top: 5px;
+    overflow: hidden;
+    font-size: 12px;
+    font-weight: bold;
+    color: grey;
+    text-align: left;
+    transition: all ease-in-out 200ms;
+    &_info {
+      font-size: 11px;
+      color: #ccc;
+    }
+  }
+  .badge-times {
+    padding: 7px 12px;
+    position: absolute;
+    top: 14px;
+    left: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+  .badge-category {
+    background-color: white;
+    width: 120px;
+    border: 2px solid;
+  }
+}
+
+//home products style
+li.product {
+  text-align: left;
+  border-radius: unset;
+  margin: 10px 0;
+  .productImg {
+    width: 35px;
+    height: auto;
+    max-height: 35px;
+    margin: auto 0 auto 12px;
+  }
+  .productsInfo {
+    width: 100%;
+    .nutrientsBox {
+      font-size: 13px;
+    }
+    .tagsBox {
+      text-align: right;
+      span {
+        margin: auto 2px;
+      }
+    }
+  }
+  .name {
+    font-weight: bold;
+    margin: 10px;
+    color: #444444;
+  }
+  .badge-times {
+    padding: 10px 6px;
+  }
+  .badge-category {
+    background-color: white;
+    width: 120px;
+    border: 2px solid;
+    .categoryImg {
+      width: 20px;
+    }
+  }
+}
+
+[data-category="meat"] {
+  .badge-category {
+    border-color: #fda2a2 !important;
+    color: #fda2a2 !important;
+  }
+}
+[data-category="dairy"] {
+  .badge-category {
+    border-color: lightgrey !important;
+    color: lightgrey !important;
+  }
+}
+[data-category="bread"] {
+  .badge-category {
+    border-color: #b79569 !important;
+    color: #b79569 !important;
+  }
+}
+[data-category="vegetables"] {
+  .badge-category {
+    border-color: #90bc90 !important;
+    color: #90bc90 !important;
+  }
+}
+[data-category="fruits"] {
+  .badge-category {
+    border-color: #ffd9a4 !important;
+    color: #ffd9a4 !important;
+  }
+}
+[data-category="frozen-food"] {
+  .badge-category {
+    border-color: #aee5e4 !important;
+    color: #aee5e4 !important;
+  }
+}
+[data-category="sweets"] {
+  .badge-category {
+    border-color: #d9a7b8 !important;
+    color: #d9a7b8 !important;
+  }
+}
+[data-category="drinks"] {
+  .badge-category {
+    border-color: #ffebce !important;
+    color: #ffebce !important;
+  }
+}

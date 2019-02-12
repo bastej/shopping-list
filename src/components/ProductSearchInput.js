@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./styles/productSearch.sass";
+import "./ProductSearchInput.sass";
 import _ from "lodash";
 import axios from "axios";
 import { Field, change } from "redux-form";
@@ -43,9 +43,9 @@ class productSearch extends Component {
     });
   }
 
-  setSelected = (value) => {
+  setSelected = value => {
     // this.setState({ selected: value })
-    this.props.change("ProductsNewForm", 'name', value);
+    this.props.change("ProductsNewForm", "name", value);
     // this.state.selected && (document.querySelector("input#productSearch").value = this.state.selected)
     // alert("state val" + this.state.selected + "przekazane do fnkc" + value + "pole" + document.querySelector("input#productSearch").value)
     this.setState({ foods: "" });
@@ -110,4 +110,7 @@ class productSearch extends Component {
   }
 }
 
-export default connect(null, {change})(productSearch);
+export default connect(
+  null,
+  { change }
+)(productSearch);

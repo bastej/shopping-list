@@ -125,25 +125,14 @@ const INITIAL_LISTS = {
       1: { id: 1, name: "mydło", category: "chemistry", count: 20 },
       2: {
         id: 2,
-        name: "mrożone truskawki",
-        category: "frozen-food",
+        name: "mleko",
+        category: "dairy",
         serving_weight_grams: 221,
         calories: 77,
         carbohydrates: 20,
         proteins: 0.9,
         fats: 0.2,
         count: 43
-      },
-      3: {
-        id: 3,
-        name: "mleko",
-        category: "dairy",
-        serving_weight_grams: 245,
-        calories: 51,
-        carbohydrates: 4.9,
-        proteins: 3.3,
-        fats: 2.0,
-        count: 1
       }
     }
   }

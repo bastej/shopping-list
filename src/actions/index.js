@@ -57,7 +57,7 @@ export function addProduct(values, listID) {
               _.findKey(current_request.full_nutrients, function(obj) {
                 return obj.attr_id === 208;
               })
-            ].value.toFixed(1),
+            ].value.toFixed(0),
             carbohydrates: current_request.full_nutrients[
               _.findKey(current_request.full_nutrients, function(obj) {
                 return obj.attr_id === 205;

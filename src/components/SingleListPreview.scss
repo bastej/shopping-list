@@ -1,0 +1,21 @@
+@import "./styles/colors";
+
+.homeListTile {
+  position: relative;
+  padding: 30px 30px 45px 30px;
+  margin: 20px;
+  border: 1px solid #eee;
+  background-color: #ffffff;
+  hr {
+    height: 2px;
+    background-color: $lightBlue;
+  }
+  .btnDelete {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+  .btnOpenList {
+    margin-top: 30px;
+  }
+}

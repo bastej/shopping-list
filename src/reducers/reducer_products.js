@@ -42,9 +42,9 @@ const INITIAL_PORDUCTS = {
     fats: 17.0,
     usageCount: 1
   },
-  4: { id: 4, name: "domestos", category: "chemistry", usageCount: 1 },
-  5: { id: 5, name: "mydło", category: "chemistry", usageCount: 1 },
-  6: { id: 6, name: "folia aluminiowa", category: "chemistry", usageCount: 1 },
+  4: { id: 4, name: "domestos", category: "non food", usageCount: 1 },
+  5: { id: 5, name: "mydło", category: "non food", usageCount: 1 },
+  6: { id: 6, name: "folia aluminiowa", category: "non food", usageCount: 1 },
   7: {
     id: 7,
     name: "ser żółty",
@@ -73,12 +73,6 @@ const INITIAL_PORDUCTS = {
     carbohydrates: 0,
     proteins: 21.5,
     fats: 1.3,
-    usageCount: 1
-  },
-  10: {
-    id: 10,
-    name: "mrożone truskawki",
-    category: "frozen-food",
     usageCount: 1
   }
 };

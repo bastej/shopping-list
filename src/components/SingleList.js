@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { Field, reduxForm, reset } from "redux-form";
 import { connect } from "react-redux";
 import { addProduct, addCategory } from "../actions";
-import Navbar from "./navbar";
-import ProductSearch from "./productSearch";
-import Product from "./product";
-import "./styles/singleList.sass";
+import Navbar from "./Navbar";
+import ProductSearch from "./ProductSearchInput";
+import Product from "./Product";
+import "./SingleList.scss";
 
 class SingleList extends Component {
   state = {
@@ -18,10 +18,11 @@ class SingleList extends Component {
   };
 
   componentDidMount() {
-    this.sumNutrients();
+    //at first calculate nutrients of products and output to table
+    this.renderNutrientsTable();
   }
 
-  sumNutrients = () => {
+  renderNutrientsTable = () => {
     let calories = 0;
     let carbohydrates = 0;
     let proteins = 0;
@@ -75,23 +76,6 @@ class SingleList extends Component {
     const className = `form-control ${
       field.meta.touched && field.meta.error ? "is-invalid" : ""
     }`;
-    if (field.input.name === "count") {
-      return (
-        <div className="form-group">
-          <input
-            type={field.input.name === "count" ? "number" : "text"}
-            list={field.list || ""}
-            className={className}
-            placeholder={field.placeholder}
-            {...field.input}
-          />
-
-          <div className="text-danger">
-            {field.meta.touched ? field.meta.error : ""}
-          </div>
-        </div>
-      );
-    }
     return (
       <div className="form-group">
         <input
@@ -116,7 +100,7 @@ class SingleList extends Component {
   }
 
   render() {
-    const { list, handleSubmit, products, categories } = this.props;
+    const { list, handleSubmit, categories } = this.props;
     if (!list) {
       return (
         <div>
@@ -126,7 +110,6 @@ class SingleList extends Component {
         </div>
       );
     }
-
     return (
       <div className="singleList">
         <Navbar list={list} />
@@ -151,21 +134,8 @@ class SingleList extends Component {
                       name="category"
                       placeholder="Choose category"
                     />
-                    {/* <Field
-                    component={this.renderField}
-                    list="products"
-                    name="name"
-                    placeholder="Text product name"
-                  /> */}
                     <ProductSearch />
 
-                    {/* <label htmlFor="products">
-                    <select id="products">
-                      {_.map(products, product => {
-                        return <option key={product.id} value={product.name} />;
-                      })}
-                    </select>
-                  </label>*/}
                     <datalist id="categories" style={{ width: "100%" }}>
                       {_.map(categories, category => {
                         return (
@@ -196,6 +166,7 @@ class SingleList extends Component {
                       product={product}
                       list={list}
                       match={match}
+                      parentComponent={"SingleList"}
                     />
                   );
                 })}
@@ -203,7 +174,7 @@ class SingleList extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col">{this.sumNutrients()}</div>
+            <div className="col">{this.renderNutrientsTable()}</div>
           </div>
         </div>
       </div>
@@ -215,7 +186,7 @@ function validate(values) {
   console.log("validacja: ", values);
   const errors = {};
   if (!values.name) {
-    errors.name = "Enter a title!";
+    errors.name = "Enter a name!";
   }
   if (!values.category) {
     errors.category = "Enter a category!";

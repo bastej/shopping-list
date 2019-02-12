@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./styles/createListView.sass";
+import "./CreateListView.sass";
 import { connect } from "react-redux";
 import { createNewList } from "../actions";
 import { Link } from "react-router-dom";
-import Navbar from "./navbar";
+import Navbar from "./Navbar";
 
 class CreateListView extends Component {
   state = {
