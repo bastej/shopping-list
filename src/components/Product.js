@@ -26,61 +26,59 @@ const Product = props => {
           </div>
 
           {product.calories && (
-            <table className="productsInfo">
-              <tbody>
-                <tr>
-                  <td>
-                    <div className="nutrientsBox">
-                      <span>
-                        Portion:{" "}
-                        {product.serving_weight_grams
-                          ? product.count * product.serving_weight_grams
-                          : "0.0"}
-                      </span>
-                      <span>
-                        {" "}
-                        | Calories:{" "}
-                        {product.calories
-                          ? product.count * product.calories
-                          : "0.0"}
-                      </span>
-                      <span>
-                        {" "}
-                        | Carbohydrates:{" "}
-                        {product.carbohydrates
-                          ? (product.count * product.carbohydrates).toFixed(1)
-                          : "0.0"}
-                      </span>
-                      <span>
-                        {" "}
-                        | Proteins:{" "}
-                        {product.proteins
-                          ? (product.count * product.proteins).toFixed(1)
-                          : "0.0"}
-                      </span>
-                      <span>
-                        {" "}
-                        | Fats:{" "}
-                        {product.fats
-                          ? (product.count * product.fats).toFixed(1)
-                          : "0.0"}
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="tagsBox">
-                      {_.map(product.tags, (tag, id) => {
-                        return (
-                          <span key={id} className="badge badge-warning">
-                            {tag}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="productsInfo">
+              <div className="row">
+                <div className="col-12 col-lg-6">
+                  <div className="nutrientsBox">
+                    <span>
+                      Portion:{" "}
+                      {product.serving_weight_grams
+                        ? product.count * product.serving_weight_grams
+                        : "0.0"}
+                    </span>
+                    <span>
+                      {" "}
+                      | Calories:{" "}
+                      {product.calories
+                        ? product.count * product.calories
+                        : "0.0"}
+                    </span>
+                    <span>
+                      {" "}
+                      | Carbohydrates:{" "}
+                      {product.carbohydrates
+                        ? (product.count * product.carbohydrates).toFixed(1)
+                        : "0.0"}
+                    </span>
+                    <span>
+                      {" "}
+                      | Proteins:{" "}
+                      {product.proteins
+                        ? (product.count * product.proteins).toFixed(1)
+                        : "0.0"}
+                    </span>
+                    <span>
+                      {" "}
+                      | Fats:{" "}
+                      {product.fats
+                        ? (product.count * product.fats).toFixed(1)
+                        : "0.0"}
+                    </span>
+                  </div>
+                </div>
+                <div className="col-12 col-lg-6">
+                  <div className="tagsBox">
+                    {_.map(product.tags, (tag, id) => {
+                      return (
+                        <span key={id} className="badge badge-warning">
+                          {tag}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
 
           <button
