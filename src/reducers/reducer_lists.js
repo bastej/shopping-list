@@ -12,20 +12,27 @@ import _ from "lodash";
 const INITIAL_LISTS = {
   0: {
     id: 0,
-    title: "Test list",
-    createDate: "1.11.1999",
+    title: "Christmas shopping",
+    createDate: "04.09.2018",
     productsList: {
       0: {
         id: 0,
-        name: "banan",
-        category: "fruits",
-        serving_weight_grams: 118,
-        calories: 97,
-        carbohydrates: 21.8,
-        proteins: 1.0,
-        fats: 0.3,
-        tags: ["zdrowy", "weglowodany"],
-        count: 2
+        name: "potato",
+        category: "vegetables",
+        serving_weight_grams: 173,
+        calories: 161,
+        carbohydrates: 36.6,
+        proteins: 4.3,
+        fats: 0.2,
+        tags: [
+          "Cholesterol Free",
+          "Fat Free",
+          "Good Source of Fiber",
+          "Saturated Fat Free",
+          "Very Low Sodium"
+        ],
+        count: 2,
+        photo: "https://d2xdmhkmkbyw75.cloudfront.net/752_thumb.jpg"
       },
       1: {
         id: 1,
