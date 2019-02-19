@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import "./ProductSearchInput.sass";
 import _ from "lodash";
-import axios from "axios";
+import { nutritionixHints } from "../api/nutritionix";
 import { Field, change } from "redux-form";
 import { connect } from "react-redux";
-
-const API_KEY = "66dc95ac590ef97c7de66e82397a3853";
-const APP_KEY = "6bbdffac";
-const ROOT_URL = "https://trackapi.nutritionix.com/v2/search/instant";
 
 class productSearch extends Component {
   state = {
@@ -17,31 +13,26 @@ class productSearch extends Component {
   onInputChange = query => {
     console.log("zapytanie do API");
     if (query.length) {
-      this.getProductsSuggestions(query);
+      this.getProductsHints(query);
     }
     // else {
     //   this.setState({ foods: "" });
     // }
   };
 
-  getProductsSuggestions(query) {
-    let config = {
-      headers: {
-        "x-app-id": APP_KEY,
-        "x-app-key": API_KEY,
-        "x-remote-user-id": 0
+  getProductsHints = async query => {
+    const request = await nutritionixHints.get(`/search/instant/`, {
+      params: {
+        common_general: true,
+        detailed: true,
+        claims: true,
+        branded: false,
+        query: query
       }
-    };
-    const request = axios.get(
-      `${ROOT_URL}?common_general=true&detailed=true&claims=true&branded=false&query=${query}`,
-      config
-    );
-    request.then(request => {
-      const current_request = request.data.common;
-      const foods = _.map(current_request, elem => elem.food_name);
-      this.setState({ foods });
     });
-  }
+    const foods = _.map(request.data.common, elem => elem.food_name);
+    this.setState({ foods });
+  };
 
   setSelected = value => {
     // this.setState({ selected: value })
@@ -70,8 +61,7 @@ class productSearch extends Component {
           {field.meta.touched ? field.meta.error : ""}
         </div>
         <ul id="listbox" role="listbox" className="list-group">
-          {/*field.meta.active &&*/
-          this.state.foods &&
+          {this.state.foods &&
             field.input.value &&
             _.map(this.state.foods, (elem, index) => {
               return (
