@@ -1,0 +1,34 @@
+@import "./styles/colors";
+
+nav {
+  margin-bottom: 30px;
+  background-color: $darkBlue;
+  .page-header {
+    font-size: 24px;
+  }
+  .go-home-btn.active {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .go-home-btn {
+    transition: all ease-in-out 300ms;
+  }
+  .all-list-btn.active {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+  
+@media only screen and (max-width : 480px) {
+  nav {
+    padding: 0 !important;
+    .page-header {
+      font-size: 20px;
+    }
+    .btn {
+      span {
+        display: none;
+      }
+    }
+  }
+}

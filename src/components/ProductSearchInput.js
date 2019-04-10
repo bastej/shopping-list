@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./ProductSearchInput.sass";
+import "./ProductSearchInput.scss";
 import _ from "lodash";
 import { nutritionixHints } from "../api/nutritionix";
 import { Field, change } from "redux-form";
@@ -49,7 +49,7 @@ class productSearch extends Component {
     return (
       <React.Fragment>
         <input
-          id="productSearch"
+          id="product-search"
           name="product"
           type="text"
           className={className}
@@ -69,7 +69,6 @@ class productSearch extends Component {
                   onClick={e => this.setSelected(e.target.textContent)}
                   // onMouseOver={e => this.selectProduct(e.target.textContent)}
                   key={index}
-                  role="option"
                   id={"listbox-" + index}
                   className="list-group-item"
                 >
@@ -88,9 +87,10 @@ class productSearch extends Component {
       this.onInputChange(query);
     }, 800);
     return (
-      <div className="productSearch form-group">
+      <div className="product-search form-group">
         <Field
           onChange={event => onInputChange(event.target.value)}
+          onBlur={() => this.setState({foods: ''})}
           name="name"
           placeholder="Text product name"
           component={this.renderProdSearch}

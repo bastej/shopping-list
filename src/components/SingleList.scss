@@ -1,33 +1,5 @@
 @import "./styles/colors";
 
-.singleList {
-  button.deleteBtn {
-    margin-left: 5px;
-  }
-  li {
-    line-height: 27px;
-    margin: 7px 0;
-  }
-  .categoryBox {
-    margin: auto 30px;
-  }
-  #categories {
-    width: 100% !important;
-    background: red;
-  }
-  form {
-    select {
-      width: 0;
-    }
-  }
-  .sumNutrientsTable {
-    tr {
-      td:first-child {
-        padding-left: 15px !important;
-      }
-      td {
-        color: $darkGreen;
-      }
-    }
-  }
+.single-list {
+  
 }

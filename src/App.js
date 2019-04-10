@@ -5,12 +5,10 @@ import Home from "./components/Home";
 import CreateListView from "./components/CreateListView";
 import SingleList from "./components/SingleList";
 import AllLists from "./components/AllLists";
-import Footer from "./components/Footer";
 import "./components/styles/globalStyle.sass";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleUp,
   faAngleDown,
@@ -43,7 +41,6 @@ class App extends Component {
               <Route path="/createList" component={CreateListView} />
               <Route path="/" component={Home} />
             </Switch>
-            {/* <Footer/> */}
           </main>
         </React.Fragment>
       </BrowserRouter>

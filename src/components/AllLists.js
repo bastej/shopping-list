@@ -1,4 +1,4 @@
-import "./AllLists.sass";
+import "./AllLists.scss";
 import React from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
@@ -8,7 +8,7 @@ import SingleListPreview from "./SingleListPreview";
 const AllLists = props => {
   const { lists } = props;
   return (
-    <div className="allLists">
+    <div className="all-lists">
       <Navbar lists={lists} />
       <div className="container">
         <h3>Lists:</h3>

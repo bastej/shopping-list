@@ -1,8 +1,7 @@
+import "./CreateListView.scss";
 import React, { Component } from "react";
-import "./CreateListView.sass";
 import { connect } from "react-redux";
 import { createNewList } from "../actions";
-import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 
 class CreateListView extends Component {
@@ -23,13 +22,13 @@ class CreateListView extends Component {
 
   render() {
     return (
-      <div className="createNewList">
+      <div className="create-new-list">
         <Navbar />
         <div className="container">
           <div className="row">
             <div className="col-lg-6 col-md-12 offset-lg-3">
               <div className="card">
-                <div className="card-header bg-lightBlue text-white">
+                <div className="card-header bg-lightblue text-white">
                   <h4>Create new list</h4>
                 </div>
                 <div className="card-body">

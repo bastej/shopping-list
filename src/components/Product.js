@@ -8,28 +8,30 @@ import { connect } from "react-redux";
 const Product = props => {
   const { product, match, list, parentComponent } = props;
   const renderContent = () => {
+
+    // TODO uzyc nesting comp ?
     //SingleList Product render
     if (parentComponent === "SingleList") {
       return (
-        <li className="list-group-item product">
+        <div className="product">
           <div className="badge badge-info">{product.count}</div>
-          {product.photo && <img className="productImg" src={product.photo} />}
+          {product.photo && <img className="product-img" alt={product.name} src={product.photo} />}
           <span className="name">{" " + product.name}</span>
           <div
-            className="btn btn-sm categoryBox"
+            className="btn btn-sm category-box"
             data-category={product.category}
           >
             <div className="badge badge-category">
               {product.category + " "}
-              <img src={match && match.img} className="categoryImg" />
+              {match && <img src={match.img} alt={product.category} className="category-img" />}
             </div>
           </div>
 
           {product.calories && (
-            <div className="productsInfo">
+            <div className="products-info">
               <div className="row">
                 <div className="col-12 col-lg-6">
-                  <div className="nutrientsBox">
+                  <div className="nutrients-box">
                     <span>
                       Portion:{" "}
                       {product.serving_weight_grams
@@ -67,7 +69,7 @@ const Product = props => {
                   </div>
                 </div>
                 <div className="col-12 col-lg-6">
-                  <div className="tagsBox">
+                  <div className="tags-box">
                     {_.map(product.tags, (tag, id) => {
                       return (
                         <span key={id} className="badge badge-warning">
@@ -83,7 +85,7 @@ const Product = props => {
 
           <button
             onClick={() => props.deleteProduct(list.id, product.id)}
-            className="btn btn-sm btn-green deleteBtn float-right"
+            className="btn btn-sm btn-green delete-btn float-right"
           >
             <FontAwesomeIcon className="fa-md" icon="times" />
           </button>
@@ -105,16 +107,11 @@ const Product = props => {
               <FontAwesomeIcon className="fa-md" icon="angle-down" />
             </button>
           </div>
-        </li>
+        </div>
       );
       //Home Product render
     } else if (parentComponent === "Home") {
       return (
-        <div
-          key={product.id}
-          data-category={product.category}
-          className="col-12 col-md-6 col-lg-3"
-        >
           <div
             className="product"
             style={
@@ -129,7 +126,7 @@ const Product = props => {
             <h6 className="name">{product.name} </h6>
             <div className="badge badge-category">
               {product.category + " "}
-              <img src={match && match.img} className="categoryImg" />
+              {match && <img src={match.img} alt={product.category} className="category-img" />}
             </div>
 
             {product.category !== "non food" && (
@@ -137,7 +134,7 @@ const Product = props => {
                 <div>
                   <FontAwesomeIcon
                     data-switch="false"
-                    className="fa-lg nutrientsSwitch"
+                    className="fa-lg nutrients-switch"
                     icon="angle-down"
                   />
                 </div>
@@ -159,7 +156,6 @@ const Product = props => {
               </div>
             )}
           </div>
-        </div>
       );
     }
   };

@@ -1,5 +1,5 @@
+import "./AddProductForm.scss"
 import React from "react";
-import _ from "lodash";
 import { Field, reduxForm, reset } from "redux-form";
 import { connect } from "react-redux";
 import { addProduct, addCategory } from "../actions";
@@ -33,36 +33,37 @@ const AddProductForm = props => {
     props.reset("ProductsNewForm");
   };
 
-  const { categories, handleSubmit, listID } = props;
-  console.log("props:", props);
+  const { handleSubmit, listID } = props;
   return (
-    <form
+    <div className="add-product-form">
+      <form
       onSubmit={handleSubmit(onSubmit.bind(this))}
       className="form-group"
       id="test1"
-    >
-      <Field component={renderField} name="count" placeholder="Set count" />
-      <Field
-        component={renderField}
-        list="categories"
-        name="category"
-        placeholder="Choose category"
-      />
-      <ProductSearch />
-
-      <datalist id="categories" style={{ width: "100%" }}>
-        {_.map(categories, category => {
-          return <option key={category.id} value={category.name} />;
-        })}
-      </datalist>
-
-      <button
-        className="btn btn-green btn-block font-weight-bold"
-        type="submit"
       >
-        Add to List
-      </button>
-    </form>
+        <Field component={renderField} name="count" placeholder="Set count" />
+        <Field
+          component={renderField}
+          // list="categories" //use autocomplete or like in ProdSerachInput
+          name="category"
+          placeholder="Choose category"
+        />
+        <ProductSearch />
+
+        {/* <datalist id="categories" style={{ width: "100%" }}>
+          {_.map(categories, category => {
+            return <option key={category.id} value={category.name} />;
+          })}
+        </datalist> */}
+
+        <button
+          className="btn btn-green btn-block font-weight-bold"
+          type="submit"
+        >
+          Add to List
+        </button>
+      </form>
+    </div>
   );
 };
 

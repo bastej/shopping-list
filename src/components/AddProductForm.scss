@@ -1,0 +1,11 @@
+.add-product-form {
+    #categories {
+        width: 100% !important;
+        background: red;
+    }
+    form {
+        select {
+          width: 0;
+        }
+    }
+}

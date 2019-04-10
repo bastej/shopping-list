@@ -2,13 +2,11 @@ import axios from "axios";
 import _ from "lodash";
 
 export const CREATE_NEW_LIST = "CREATE_NEW_LIST";
-// export const FETCH_LISTS = "FETCH_LISTS";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const UPDATE_PRODUCT_COUNT = "UDPATE_PRODUCT_COUNT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const DELETE_LIST = "DELETE_LIST";
 export const ADD_CATEGORY = "ADD_CATEGORY";
-export const GET_SUGGESTIONS = "GET_SUGGESTIONS";
 
 const API_KEY = "66dc95ac590ef97c7de66e82397a3853";
 const APP_KEY = "6bbdffac";

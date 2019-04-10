@@ -1,4 +1,4 @@
-import { ADD_CATEGORY, INIT_CATEGORIES } from "../actions";
+import { ADD_CATEGORY } from "../actions";
 import _ from "lodash";
 import bread from "../images/bread.png";
 import dairy from "../images/dairy.png";

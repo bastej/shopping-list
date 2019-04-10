@@ -1,6 +1,6 @@
 @import "./styles/colors";
 
-.homeListTile {
+.single-list-preview {
   position: relative;
   padding: 30px 30px 45px 30px;
   margin: 20px;
@@ -10,12 +10,12 @@
     height: 2px;
     background-color: $lightBlue;
   }
-  .btnDelete {
+  .btn-delete {
     position: absolute;
     top: 5px;
     right: 5px;
   }
-  .btnOpenList {
+  .btn-open-list {
     margin-top: 30px;
   }
 }

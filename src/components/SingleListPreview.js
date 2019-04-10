@@ -8,9 +8,8 @@ import { connect } from "react-redux";
 
 const SingleListPreview = props => {
   const { list, deleteList } = props;
-  console.log(props);
   return (
-    <div className="homeListTile">
+    <div className="single-list-preview">
       <h4>{list.title}</h4>
       <hr />
       <div className="badge badge-warning">
@@ -21,21 +20,17 @@ const SingleListPreview = props => {
       </div>
       <button
         onClick={() => deleteList(list.id)}
-        className="btn btn-sm btn-outline-lightgreen btnDelete"
+        className="btn btn-sm btn-outline-lightgreen btn-delete"
         title="Delete"
       >
         <FontAwesomeIcon className="fa-md" icon="times" />
       </button>
       <Link
         to={`/lists/${list.id}`}
-        className="btn btn-green btn-block btnOpenList"
+        className="btn btn-green btn-block btn-open-list"
       >
         Open list
       </Link>
-      <div>
-        {/* kcal: {product.calories} | w: {product.carbohydrates} | b:{" "}
-                    {product.proteins} | t: {product.fats} */}
-      </div>
     </div>
   );
 };

@@ -1,9 +1,9 @@
+import "./Home.scss";
 import React, { Component } from "react";
 import _ from "lodash";
 import $ from "jquery";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import "./Home.sass";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navbar from "./Navbar";
 import Product from "./Product";
@@ -11,7 +11,7 @@ import SingleListPreview from "./SingleListPreview";
 
 class Home extends Component {
   componentDidMount() {
-    $(".product .nutrientsSwitch").click(function() {
+    $(".product .nutrients-switch").click(function() {
       const box = this.parentElement.parentElement.querySelector(".nutrients");
       if ($(this).attr("data-switch") === "false") {
         $(this)
@@ -29,16 +29,17 @@ class Home extends Component {
 
   render() {
     const { lists, products, categories } = this.props;
-    const threeLastestList = _.filter(lists, (el, index) => {
+    //get 3 latest list
+    const lastestList = _.filter(lists, (el, index) => {
       return index > _.size(lists) - 4;
-    }); //get 3 latest list
+    }); 
     return (
       <div className="home">
         <Navbar />
         <div className="container">
           <Link
             to="/createList"
-            className="btn btn-green btnAddList text-white font-weight-bold"
+            className="btn btn-green btn-add-list text-white font-weight-bold"
           >
             <p>Create new list</p>
             <FontAwesomeIcon className="fa-lg" icon="plus" />
@@ -47,7 +48,7 @@ class Home extends Component {
             <div className="col-12">
               <h3>Recent lists:</h3>
             </div>
-            {_.map(threeLastestList, list => {
+            {_.map(lastestList, list => {
               return (
                 <div key={list.id} className="col-12 col-lg-4">
                   <SingleListPreview list={list} />
@@ -60,16 +61,22 @@ class Home extends Component {
               <h3>Most used products:</h3>
             </div>
           </div>
-          <div className="row productsList">
+          <div className="row products-list">
             {_.map(products, product => {
               let match = _.find(categories, { name: product.category });
               return (
-                <Product
+                <div
                   key={product.id}
-                  product={product}
-                  match={match}
-                  parentComponent={"Home"}
-                />
+                  data-category={product.category}
+                  className="col-12 col-md-6 col-lg-3"
+                >
+                  <Product
+                    key={product.id}
+                    product={product}
+                    match={match}
+                    parentComponent={"Home"}
+                  />
+                </div>
               );
             })}
           </div>

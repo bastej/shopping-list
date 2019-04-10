@@ -23,7 +23,7 @@
     -moz-box-shadow: unset;
     box-shadow: unset;
   }
-  .productImg {
+  .product-img {
     width: auto;
     height: 70px;
     max-width: 100%;
@@ -35,7 +35,17 @@
     margin: 10px;
     color: #444444;
   }
-  .nutrientsSwitch {
+  button.delete-btn {
+    margin-left: 5px;
+  }
+  li {
+    line-height: 27px;
+    margin: 7px 0;
+  }
+  .category-box {
+    margin: auto 30px;
+  }
+  .nutrients-switch {
     margin: 8px auto;
     color: $darkGreen;
   }
@@ -70,46 +80,52 @@
 }
 
 //home products style
-li.product {
-  text-align: left;
-  border-radius: unset;
+li {
+  padding: 0 !important;
   margin: 10px 0;
-  .productImg {
-    max-width: 35px;
-    height: auto;
-    max-height: 35px;
-    margin: auto 0 auto 12px;
-  }
-  .productsInfo {
-    width: 100%;
-    .nutrientsBox {
-      font-size: 13px;
+  .product {
+    text-align: left;
+    border-radius: unset;
+    margin: 0;
+    .product-img {
+      max-width: 35px;
+      height: auto;
+      max-height: 35px;
+      margin: auto 0 auto 12px;
     }
-    .tagsBox {
-      text-align: right;
-      span {
-        margin: auto 2px;
+    .products-info {
+      width: 100%;
+      .nutrients-box {
+        font-size: 13px;
+      }
+      .tags-box {
+        text-align: right;
+        span {
+          margin: auto 2px;
+        }
+      }
+    }
+    .name {
+      font-weight: bold;
+      margin: 10px;
+      color: #444444;
+    }
+    .badge-times {
+      padding: 10px 6px;
+    }
+    .badge-category {
+      background-color: white;
+      width: 120px;
+      border: 2px solid;
+      .category-img {
+        width: 20px;
       }
     }
   }
-  .name {
-    font-weight: bold;
-    margin: 10px;
-    color: #444444;
-  }
-  .badge-times {
-    padding: 10px 6px;
-  }
-  .badge-category {
-    background-color: white;
-    width: 120px;
-    border: 2px solid;
-    .categoryImg {
-      width: 20px;
-    }
-  }
-}
+} 
 
+
+//categories colors config
 [data-category="meat"] {
   .badge-category {
     border-color: #fda2a2 !important;

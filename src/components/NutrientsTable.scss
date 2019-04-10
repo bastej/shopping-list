@@ -1,0 +1,12 @@
+@import "./styles/colors";
+
+.nutrients-table {
+    tr {
+        td:first-child {
+          padding-left: 15px !important;
+        }
+        td {
+          color: $darkGreen;
+        }
+    }
+}

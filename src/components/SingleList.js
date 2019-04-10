@@ -1,77 +1,47 @@
+import "./SingleList.scss";
 import React, { Component } from "react";
 import _ from "lodash";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Navbar from "./Navbar";
 import Product from "./Product";
-import "./SingleList.scss";
 import AddProductForm from "./AddProductForm";
+import NutrientsTable from "./NutrientsTable";
 
 class SingleList extends Component {
-  state = {
-    calories: 0,
-    carbohydrates: 0,
-    proteins: 0,
-    fats: 0
-  };
-
+  // state = {
+  //   calories: 0,
+  //   carbohydrates: 0,
+  //   proteins: 0,
+  //   fats: 0
+  // };
+  
   componentDidMount() {
-    //at first calculate nutrients of products and output to table
-    this.renderNutrientsTable();
+    // this.calculateNutrients();
   }
 
-  renderNutrientsTable = () => {
-    let calories = 0;
-    let carbohydrates = 0;
-    let proteins = 0;
-    let fats = 0;
+  calculateNutrients = () => {
+    let calories = 0,
+      carbohydrates = 0,
+      proteins = 0,
+      fats = 0;
     _.map(this.props.list.productsList, product => {
       product.calories && (calories += product.calories * product.count);
-      product.carbohydrates &&
-        (carbohydrates += product.carbohydrates * product.count);
+      product.carbohydrates && (carbohydrates += product.carbohydrates * product.count);
       product.proteins && (proteins += product.proteins * product.count);
       product.fats && (fats += product.fats * product.count);
     });
-    return (
-      <table className="table bg-white sumNutrientsTable">
-        <thead>
-          <tr className="bg-lightBlue text-white">
-            <th scope="col">Nutrients of products</th>
-            <th scope="col">Total value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td scope="row" className="font-weight-bold">
-              Calories
-            </td>
-            <td>{calories.toFixed(1)}</td>
-          </tr>
-          <tr>
-            <td scope="row" className="font-weight-bold">
-              Carbohydrates
-            </td>
-            <td>{carbohydrates.toFixed(1)}</td>
-          </tr>
-          <tr>
-            <td scope="row" className="font-weight-bold">
-              Proteins
-            </td>
-            <td>{proteins.toFixed(1)}</td>
-          </tr>
-          <tr>
-            <td scope="row" className="font-weight-bold">
-              Fats
-            </td>
-            <td>{fats.toFixed(1)}</td>
-          </tr>
-        </tbody>
-      </table>
-    );
-  };
+    return {calories, carbohydrates, proteins, fats}
+  }
 
   render() {
+    // calculate when first init, and when props update
+    // zamiast tego, aktualizowac state jak dostaniemy props od redux(jak?)
+    // i do NutrientsTable przekazac z state
+    const nutrientsValues = this.calculateNutrients();
+
     const { list, categories } = this.props;
+    const { calories, carbohydrates, proteins, fats } = nutrientsValues;
     if (!list) {
       return (
         <div>
@@ -82,7 +52,7 @@ class SingleList extends Component {
       );
     }
     return (
-      <div className="singleList">
+      <div className="single-list">
         <Navbar list={list} />
         <div className="container">
           <div className="row">
@@ -94,26 +64,34 @@ class SingleList extends Component {
               </div>
             </div>
           </div>
-          <div className="row productsList">
+          <div className="row products-list">
             <div className="col">
               <ul className="list-group">
                 {_.map(list.productsList, product => {
                   let match = _.find(categories, { name: product.category });
                   return (
-                    <Product
-                      key={product.id}
-                      product={product}
-                      list={list}
-                      match={match}
-                      parentComponent={"SingleList"}
-                    />
+                    <li key={product.id} className="list-group-item">
+                      <Product
+                        product={product}
+                        list={list}
+                        match={match}
+                        parentComponent={"SingleList"}
+                      />
+                  </li>
                   );
                 })}
               </ul>
             </div>
           </div>
           <div className="row">
-            <div className="col">{this.renderNutrientsTable()}</div>
+            <div className="col">
+              <NutrientsTable 
+                calories={calories} 
+                carbohydrates={carbohydrates}
+                proteins={proteins}
+                fats={fats}
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -124,8 +124,8 @@ const INITIAL_PORDUCTS = {
     usageCount: 1,
     photo: "https://d2xdmhkmkbyw75.cloudfront.net/712_thumb.jpg"
   },
-  9: {
-    id: 9,
+  10: {
+    id: 10,
     name: "eggs",
     category: "dairy",
     serving_weight_grams: 50,
@@ -136,8 +136,8 @@ const INITIAL_PORDUCTS = {
     usageCount: 2,
     photo: "https://d2xdmhkmkbyw75.cloudfront.net/775_thumb.jpg"
   },
-  10: {
-    id: 10,
+  11: {
+    id: 11,
     name: "cottage cheese",
     category: "dairy",
     serving_weight_grams: 108.75,
@@ -155,7 +155,7 @@ export default function(state = INITIAL_PORDUCTS, action) {
     /* mieso, nabial, pieczywo, owoce, warzywa, mrozonki, slodycze, chemia, kuchnia, lazienka, napoje  */
     case ADD_PRODUCT: {
       const index = _.size(state);
-      const { product, listID } = action.payload;
+      const { product } = action.payload;
       const match = _.find(state, { name: product.name });
       if (match) {
         return {

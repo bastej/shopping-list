@@ -3,8 +3,7 @@ import {
   ADD_PRODUCT,
   UPDATE_PRODUCT_COUNT,
   DELETE_PRODUCT,
-  DELETE_LIST,
-  GET_SUGGESTIONS
+  DELETE_LIST
 } from "../actions";
 
 import _ from "lodash";
@@ -286,8 +285,7 @@ export default function(state = INITIAL_LISTS, action) {
     }
     case ADD_PRODUCT: {
       const { product, listID } = action.payload;
-      const productID =
-        parseInt(_.findLastKey(state[listID].productsList)) + 1 || 0;
+      const productID = parseInt(_.findLastKey(state[listID].productsList)) + 1 || 0;
       return {
         ...state,
         [listID]: {
@@ -301,7 +299,6 @@ export default function(state = INITIAL_LISTS, action) {
           }
         }
       };
-      return state;
     }
     case UPDATE_PRODUCT_COUNT: {
       const { listID, productID, type } = action.payload;
