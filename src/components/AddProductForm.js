@@ -6,6 +6,7 @@ import { addProduct, addCategory } from "../actions";
 import ProductSearch from "./ProductSearchInput";
 
 const AddProductForm = props => {
+
   const renderField = field => {
     const className = `form-control ${
       field.meta.touched && field.meta.error ? "is-invalid" : ""
@@ -68,7 +69,6 @@ const AddProductForm = props => {
 };
 
 function validate(values) {
-  console.log("validacja: ", values);
   const errors = {};
   if (!values.name) {
     errors.name = "Enter a name!";

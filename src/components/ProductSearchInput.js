@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./ProductSearchInput.scss";
 import _ from "lodash";
-import { nutritionixHints } from "../api/nutritionix";
+import { nutritionixAPI } from "../api/nutritionix";
 import { Field, change } from "redux-form";
 import { connect } from "react-redux";
 
@@ -21,7 +21,7 @@ class productSearch extends Component {
   };
 
   getProductsHints = async query => {
-    const request = await nutritionixHints.get(`/search/instant/`, {
+    const request = await nutritionixAPI.get(`/search/instant/`, {
       params: {
         common_general: true,
         detailed: true,
@@ -35,10 +35,7 @@ class productSearch extends Component {
   };
 
   setSelected = value => {
-    // this.setState({ selected: value })
     this.props.change("ProductsNewForm", "name", value);
-    // this.state.selected && (document.querySelector("input#productSearch").value = this.state.selected)
-    // alert("state val" + this.state.selected + "przekazane do fnkc" + value + "pole" + document.querySelector("input#productSearch").value)
     this.setState({ foods: "" });
   };
 
@@ -90,7 +87,6 @@ class productSearch extends Component {
       <div className="product-search form-group">
         <Field
           onChange={event => onInputChange(event.target.value)}
-          onBlur={() => this.setState({foods: ''})}
           name="name"
           placeholder="Text product name"
           component={this.renderProdSearch}

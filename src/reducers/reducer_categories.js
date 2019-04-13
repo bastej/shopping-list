@@ -15,8 +15,7 @@ const INITIAL_CATEGORIES = {
   3: { id: 3, name: "fruits", img: fruits },
   4: { id: 4, name: "vegetables", img: vegetables },
   5: { id: 5, name: "sweets", img: sweets },
-  6: { id: 6, name: "non food", img: null },
-  7: { id: 7, name: "drinks", img: drinks }
+  6: { id: 6, name: "drinks", img: drinks }
 };
 
 export default function(state = INITIAL_CATEGORIES, action) {

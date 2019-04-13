@@ -112,14 +112,7 @@ const Product = props => {
       //Home Product render
     } else if (parentComponent === "Home") {
       return (
-          <div
-            className="product"
-            style={
-              product.photo && {
-                background: "url(" + product.photo + ")"
-              }
-            }
-          >
+          <div className="product">
             <div className="badge badge-info badge-times">
               x {product.usageCount}
             </div>
@@ -129,8 +122,7 @@ const Product = props => {
               {match && <img src={match.img} alt={product.category} className="category-img" />}
             </div>
 
-            {product.category !== "non food" && (
-              <div>
+            <div>
                 <div>
                   <FontAwesomeIcon
                     data-switch="false"
@@ -154,7 +146,6 @@ const Product = props => {
                   <div className="nutrients_t">f: {product.fats || "0"}</div>
                 </div>
               </div>
-            )}
           </div>
       );
     }

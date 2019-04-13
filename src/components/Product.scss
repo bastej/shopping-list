@@ -12,11 +12,8 @@
   -moz-box-shadow: 9px 10px 46px -15px rgba(200, 200, 200, 1);
   box-shadow: 9px 10px 46px -15px rgba(200, 200, 200, 1);
   transition: all ease-in-out 200ms;
+  background-color: #fff;
   cursor: pointer;
-  background-blend-mode: lighten;
-  background-repeat: no-repeat !important;
-  background-color: rgba(255, 255, 255, 0.6) !important;
-  background-position: top center !important;
   &:hover {
     transition: all ease-in-out 200ms;
     -webkit-box-shadow: unset;
