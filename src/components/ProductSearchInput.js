@@ -24,8 +24,6 @@ class productSearch extends Component {
     const request = await nutritionixAPI.get(`/search/instant/`, {
       params: {
         common_general: true,
-        detailed: true,
-        claims: true,
         branded: false,
         query: query
       }

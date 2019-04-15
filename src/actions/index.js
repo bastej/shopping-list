@@ -35,32 +35,27 @@ export function addProduct(values, listID) {
     );
 
     const responseData = response.data.common[0];
+    const { food_name, photo, claims, serving_weight_grams, full_nutrients } = responseData;
+
     const payload = {
       responseData,
       product: {
-        name: responseData.food_name,
-        photo: responseData.photo.thumb,
-        tags: responseData.claims,
-        serving_weight_grams: responseData.serving_weight_grams,
-        calories: responseData.full_nutrients[
-          _.findKey(responseData.full_nutrients, function(obj) {
-            return obj.attr_id === 208;
-          })
+        name: food_name,
+        photo: photo.thumb,
+        tags: claims,
+        serving_weight_grams: serving_weight_grams,
+        calories: full_nutrients[
+          //find obj key by attr_id prop and return obj value prop 
+          _.findKey(full_nutrients, el => el.attr_id === 208)
         ].value.toFixed(0),
-        carbohydrates: responseData.full_nutrients[
-          _.findKey(responseData.full_nutrients, function(obj) {
-            return obj.attr_id === 205;
-          })
+        carbohydrates: full_nutrients[
+          _.findKey(full_nutrients, el => el.attr_id === 205)
         ].value.toFixed(1),
-        proteins: responseData.full_nutrients[
-          _.findKey(responseData.full_nutrients, function(obj) {
-            return obj.attr_id === 203;
-          })
+        proteins: full_nutrients[
+          _.findKey(full_nutrients, el => el.attr_id === 203)
         ].value.toFixed(1),
-        fats: responseData.full_nutrients[
-          _.findKey(responseData.full_nutrients, function(obj) {
-            return obj.attr_id === 204;
-          })
+        fats: full_nutrients[
+          _.findKey(full_nutrients, el => el.attr_id === 204)
         ].value.toFixed(1),
         category: values.category,
         count: parseInt(values.count)

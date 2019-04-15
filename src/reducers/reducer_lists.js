@@ -280,12 +280,12 @@ const INITIAL_LISTS = {
 export default function(state = INITIAL_LISTS, action) {
   switch (action.type) {
     case CREATE_NEW_LIST: {
-      const index = parseInt(_.findLastKey(state)) + 1 || 0;
+      const index = _.size(state) || 0;
       return { ...state, [index]: { id: index, ...action.payload } };
     }
     case ADD_PRODUCT: {
       const { product, listID } = action.payload;
-      const productID = parseInt(_.findLastKey(state[listID].productsList)) + 1 || 0;
+      const productID = _.size(state[listID].productsList) || 0;
       return {
         ...state,
         [listID]: {
@@ -303,17 +303,18 @@ export default function(state = INITIAL_LISTS, action) {
     case UPDATE_PRODUCT_COUNT: {
       const { listID, productID, type } = action.payload;
       const { count } = state[listID].productsList[productID];
+      const { productsList } = state[listID];
       return {
         ...state,
         [listID]: {
           ...state[listID],
           productsList: {
-            ...state[listID].productsList,
+            ...productsList,
             [productID]: {
-              ...state[listID].productsList[productID],
+              ...productsList[productID],
               count:
                 type === "increment"
-                  ? state[listID].productsList[productID].count + 1
+                  ? count + 1
                   : count > 0
                   ? count - 1
                   : 0

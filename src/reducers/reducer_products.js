@@ -152,12 +152,13 @@ const INITIAL_PORDUCTS = {
 
 export default function(state = INITIAL_PORDUCTS, action) {
   switch (action.type) {
-    /* mieso, nabial, pieczywo, owoce, warzywa, mrozonki, slodycze, chemia, kuchnia, lazienka, napoje  */
     case ADD_PRODUCT: {
       const index = _.size(state);
       const { product } = action.payload;
+      //check if product exist
       const match = _.find(state, { name: product.name });
       if (match) {
+        //note that prod used one more time
         return {
           ...state,
           [match.id]: {
@@ -166,6 +167,7 @@ export default function(state = INITIAL_PORDUCTS, action) {
           }
         };
       } else {
+        //add prod to all prod list
         return {
           ...state,
           [index]: {

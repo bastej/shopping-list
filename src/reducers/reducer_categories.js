@@ -23,6 +23,7 @@ export default function(state = INITIAL_CATEGORIES, action) {
     case ADD_CATEGORY: {
       const index = _.size(state);
       const category = action.payload;
+      // check if category exist
       const match = _.find(state, { name: category });
       if (match) {
         return state;

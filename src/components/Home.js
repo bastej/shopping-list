@@ -32,7 +32,7 @@ class Home extends Component {
     //get 3 latest list
     const lastestList = _.filter(lists, (el, index) => {
       return index > _.size(lists) - 4;
-    }); 
+    });
     return (
       <div className="home">
         <Navbar />
