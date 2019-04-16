@@ -1,7 +1,7 @@
 import "./components/styles/globalStyle.sass";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 
 import Home from "./components/Home";
 import CreateListView from "./components/CreateListView";
@@ -33,7 +33,7 @@ library.add(
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter>
           <main>
             <Navbar />
             <Switch>
@@ -43,7 +43,7 @@ class App extends Component {
               <Route path="/" component={Home} />
             </Switch>
           </main>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }
