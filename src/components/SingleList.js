@@ -3,10 +3,10 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import Navbar from "./Navbar";
 import Product from "./Product";
 import AddProductForm from "./AddProductForm";
 import NutrientsTable from "./NutrientsTable";
+import { setNavHeader } from '../actions';
 
 class SingleList extends Component {
   // state = {
@@ -18,6 +18,10 @@ class SingleList extends Component {
   
   componentDidMount() {
     // this.calculateNutrients();
+    this.props.setNavHeader(this.props.list.title, _.size(this.props.list.productsList));
+  }
+  componentDidUpdate() {
+    this.props.setNavHeader(this.props.list.title, _.size(this.props.list.productsList));
   }
 
   calculateNutrients = () => {
@@ -45,7 +49,6 @@ class SingleList extends Component {
     if (!list) {
       return (
         <div>
-          <Navbar list={list} />
           Loading...
           <Link to="/">Back to home</Link>
         </div>
@@ -53,7 +56,6 @@ class SingleList extends Component {
     }
     return (
       <div className="single-list">
-        <Navbar list={list} />
         <div className="container">
           <div className="row">
             <div className="col">
@@ -109,5 +111,5 @@ function mapStateToProps({ lists, products, categories }, ownProps) {
 
 export default connect(
   mapStateToProps,
-  {}
+  { setNavHeader }
 )(SingleList);

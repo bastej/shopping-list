@@ -5,12 +5,13 @@ import $ from "jquery";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Navbar from "./Navbar";
 import Product from "./Product";
 import SingleListPreview from "./SingleListPreview";
+import { setNavHeader } from '../actions';
 
 class Home extends Component {
   componentDidMount() {
+    this.props.setNavHeader('Shopping list App');
     $(".product .nutrients-switch").click(function() {
       const box = this.parentElement.parentElement.querySelector(".nutrients");
       if ($(this).attr("data-switch") === "false") {
@@ -35,7 +36,6 @@ class Home extends Component {
     });
     return (
       <div className="home">
-        <Navbar />
         <div className="container">
           <Link
             to="/createList"
@@ -96,5 +96,5 @@ function mapStateToProps({ lists, products, categories }) {
 
 export default connect(
   mapStateToProps,
-  {}
+  { setNavHeader }
 )(Home);

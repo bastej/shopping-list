@@ -2,12 +2,16 @@ import "./CreateListView.scss";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createNewList } from "../actions";
-import Navbar from "./Navbar";
+import { setNavHeader } from "../actions";
 
 class CreateListView extends Component {
   state = {
     newListName: ""
   };
+
+  componentDidMount() {
+    this.props.setNavHeader('Create shopping list');
+  }
 
   updateNewListName = e => {
     const newListName = e.target.value;
@@ -23,7 +27,6 @@ class CreateListView extends Component {
   render() {
     return (
       <div className="create-new-list">
-        <Navbar />
         <div className="container">
           <div className="row">
             <div className="col-lg-6 col-md-12 offset-lg-3">
@@ -58,5 +61,5 @@ class CreateListView extends Component {
 
 export default connect(
   null,
-  { createNewList }
+  { createNewList, setNavHeader }
 )(CreateListView);

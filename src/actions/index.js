@@ -7,6 +7,7 @@ export const UPDATE_PRODUCT_COUNT = "UDPATE_PRODUCT_COUNT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const DELETE_LIST = "DELETE_LIST";
 export const ADD_CATEGORY = "ADD_CATEGORY";
+export const SET_NAV_HEADER = 'SET_NAV_HEADER';
 
 export function createNewList(value) {
   const list = {
@@ -103,4 +104,11 @@ export function deleteList(listID) {
     type: DELETE_LIST,
     payload: { listID }
   };
+}
+
+export function setNavHeader(text, tag) {
+  return {
+    type: SET_NAV_HEADER,
+    payload: { text, tag }
+  }
 }

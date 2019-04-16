@@ -1,3 +1,5 @@
+import "./components/styles/globalStyle.sass";
+import "bootstrap/dist/css/bootstrap.min.css";
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
@@ -5,8 +7,7 @@ import Home from "./components/Home";
 import CreateListView from "./components/CreateListView";
 import SingleList from "./components/SingleList";
 import AllLists from "./components/AllLists";
-import "./components/styles/globalStyle.sass";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "./components/Navbar";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -33,8 +34,8 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <React.Fragment>
           <main>
+            <Navbar />
             <Switch>
               <Route path="/lists/:id" component={SingleList} />
               <Route path="/lists" component={AllLists} />
@@ -42,7 +43,6 @@ class App extends Component {
               <Route path="/" component={Home} />
             </Switch>
           </main>
-        </React.Fragment>
       </BrowserRouter>
     );
   }

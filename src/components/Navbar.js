@@ -1,11 +1,27 @@
 import "./Navbar.scss";
 import React from "react";
-import _ from "lodash";
-import { Route, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { connect } from 'react-redux';
+
+const renderHeader = (header) => {
+  if(!header.tag) {
+    return <span className="page-header navbar-brand">
+      {header.text}
+    </span>
+  } else {
+    return <div className="navbar-brand abs">
+      <span className="page-header">{header.text + " "}</span>
+      <span className="badge badge-pill badge-warning">
+        {header.tag}
+      </span>            
+    </div>
+  }
+}
+
 const Navbar = props => {
-  const { list, lists } = props;
+  const { header } = props;
   return (
     <div>
       <nav className="navbar navbar-dark text-white">
@@ -14,38 +30,7 @@ const Navbar = props => {
             <FontAwesomeIcon className="fa-lg" icon="home" />{" "}
             <span>Go Home</span>
           </NavLink>
-          <Route
-            exact
-            path={"/"}
-            render={() => (
-              <span className="page-header navbar-brand">Shopping list App</span>
-            )}
-          />
-          <Route
-            exact
-            path={"/lists/:id"}
-            render={() => (
-              <div className="navbar-brand abs">
-                <span className="page-header">{list.title + " "}</span>
-                <span className="badge badge-pill badge-warning">
-                  {_.size(list.productsList)}
-                </span>
-                {/* {console.log("navbar/ props: " + props)} */}
-              </div>
-            )}
-          />
-          <Route
-            exact
-            path={"/lists"}
-            render={() => (
-              <div className="navbar-brand abs">
-                <span className="page-header">All lists </span>
-                <span className="badge badge-pill badge-warning">
-                  {_.size(lists)}
-                </span>
-              </div>
-            )}
-          />
+          {renderHeader(header)}
           <NavLink
             exact
             to={"/lists"}
@@ -59,4 +44,10 @@ const Navbar = props => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = ({ currentNavHeader }) => {
+  return { 
+    header: currentNavHeader
+  }
+}
+
+export default connect(mapStateToProps)(Navbar);
