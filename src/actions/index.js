@@ -1,13 +1,16 @@
 import _ from "lodash";
 import { nutritionixAPI } from "../api/nutritionix";
-
-export const CREATE_NEW_LIST = "CREATE_NEW_LIST";
-export const ADD_PRODUCT = "ADD_PRODUCT";
-export const UPDATE_PRODUCT_COUNT = "UDPATE_PRODUCT_COUNT";
-export const DELETE_PRODUCT = "DELETE_PRODUCT";
-export const DELETE_LIST = "DELETE_LIST";
-export const ADD_CATEGORY = "ADD_CATEGORY";
-export const SET_NAV_HEADER = 'SET_NAV_HEADER';
+import {
+  CREATE_NEW_LIST,
+  ADD_PRODUCT,
+  UPDATE_PRODUCT_COUNT,
+  DELETE_PRODUCT,
+  DELETE_LIST,
+  ADD_CATEGORY,
+  SET_NAV_HEADER,
+  GET_PRODUCT_HINTS,
+  CLEAR_PRODUCT_HINTS
+} from './types';
 
 export function createNewList(value) {
   const list = {
@@ -110,5 +113,30 @@ export function setNavHeader(text, tag) {
   return {
     type: SET_NAV_HEADER,
     payload: { text, tag }
+  }
+}
+
+export function getProductsHints(query) {
+
+  return async function(dispatch) {
+    const request = await nutritionixAPI.get(`/search/instant/`, {
+      params: {
+        common_general: true,
+        branded: false,
+        query: query
+      }
+    });
+    const payload = _.map(request.data.common, elem => elem.food_name);
+
+    dispatch({
+      type: GET_PRODUCT_HINTS,
+      payload
+    });
+  }
+}
+
+export function clearProductsHints() {
+  return {
+    type: CLEAR_PRODUCT_HINTS
   }
 }

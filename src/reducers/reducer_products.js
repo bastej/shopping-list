@@ -1,4 +1,4 @@
-import { ADD_PRODUCT } from "../actions";
+import { ADD_PRODUCT } from "../actions/types";
 import _ from "lodash";
 
 const INITIAL_PORDUCTS = {

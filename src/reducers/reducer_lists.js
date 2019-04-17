@@ -4,7 +4,7 @@ import {
   UPDATE_PRODUCT_COUNT,
   DELETE_PRODUCT,
   DELETE_LIST
-} from "../actions";
+} from "../actions/types";
 
 import _ from "lodash";
 

@@ -7,22 +7,18 @@ import ProductSearch from "./ProductSearchInput";
 
 const AddProductForm = props => {
 
-  const renderField = field => {
-    const className = `form-control ${
-      field.meta.touched && field.meta.error ? "is-invalid" : ""
-    }`;
+  const renderField = ({ input, placeholder, meta }) => {
+    const className = `form-control ${meta.touched && meta.error ? "is-invalid" : ""}`;
     return (
       <div className="form-group">
         <input
-          type={field.input.name === "count" ? "number" : "text"}
-          list={field.list || ""}
+          type={input.type}
           className={className}
-          placeholder={field.placeholder}
-          {...field.input}
+          placeholder={placeholder}
+          {...input}
         />
-
         <div className="text-danger">
-          {field.meta.touched ? field.meta.error : ""}
+          {meta.touched ? meta.error : ""}
         </div>
       </div>
     );
@@ -31,32 +27,24 @@ const AddProductForm = props => {
   const onSubmit = values => {
     props.addProduct(values, listID);
     props.addCategory(values.category);
-    props.reset("ProductsNewForm");
+    props.reset("addProduct");
   };
 
   const { handleSubmit, listID } = props;
   return (
     <div className="add-product-form">
       <form
-      onSubmit={handleSubmit(onSubmit.bind(this))}
-      className="form-group"
-      id="test1"
+        onSubmit={handleSubmit(onSubmit)}// sprawdzic
+        className="form-group"
       >
-        <Field component={renderField} name="count" placeholder="Set count" />
+        <Field component={renderField} name="count" placeholder="Set count" type="number" />
         <Field
           component={renderField}
-          // list="categories" //use autocomplete or like in ProdSerachInput
           name="category"
           placeholder="Choose category"
+          type="text"
         />
         <ProductSearch />
-
-        {/* <datalist id="categories" style={{ width: "100%" }}>
-          {_.map(categories, category => {
-            return <option key={category.id} value={category.name} />;
-          })}
-        </datalist> */}
-
         <button
           className="btn btn-green btn-block font-weight-bold"
           type="submit"
@@ -78,8 +66,7 @@ function validate(values) {
   }
   if (values.count < 1) {
     errors.count = "Enter value bigger than 0!";
-  }
-  if (!values.count) {
+  } else if (!values.count) {
     errors.count = "Enter a count!";
   }
   return errors;
@@ -93,7 +80,7 @@ function mapStateToProps({ categories }) {
 
 export default reduxForm({
   validate,
-  form: "ProductsNewForm", //nazwa formularza, jakby byl dwa na stronie zeby rozroznic
+  form: "addProduct", //nazwa formularza, jakby byl dwa na stronie zeby rozroznic
   fields: ["count", "category", "name"]
 })(
   connect(

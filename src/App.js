@@ -37,9 +37,9 @@ class App extends Component {
           <main>
             <Navbar />
             <Switch>
+              <Route path="/lists/create" component={CreateListView} />
               <Route path="/lists/:id" component={SingleList} />
               <Route path="/lists" component={AllLists} />
-              <Route path="/createList" component={CreateListView} />
               <Route path="/" component={Home} />
             </Switch>
           </main>

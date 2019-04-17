@@ -1,83 +1,66 @@
-import React, { Component } from "react";
 import "./ProductSearchInput.scss";
+import React, { Component } from "react";
 import _ from "lodash";
-import { nutritionixAPI } from "../api/nutritionix";
 import { Field, change } from "redux-form";
 import { connect } from "react-redux";
+import { getProductsHints, clearProductsHints } from '../actions';
 
 class productSearch extends Component {
-  state = {
-    foods: ""
-  };
 
   onInputChange = query => {
-    console.log("zapytanie do API");
     if (query.length) {
-      this.getProductsHints(query);
+      this.props.getProductsHints(query);
+    } else {
+      this.props.clearProductsHints();
     }
-    // else {
-    //   this.setState({ foods: "" });
-    // }
-  };
-
-  getProductsHints = async query => {
-    const request = await nutritionixAPI.get(`/search/instant/`, {
-      params: {
-        common_general: true,
-        branded: false,
-        query: query
-      }
-    });
-    const foods = _.map(request.data.common, elem => elem.food_name);
-    this.setState({ foods });
   };
 
   setSelected = value => {
-    this.props.change("ProductsNewForm", "name", value);
-    this.setState({ foods: "" });
+    this.props.change("addProduct", "name", value);
+    this.props.clearProductsHints();
   };
 
-  renderProdSearch = field => {
+  renderHints = ()  => {
+    return _.map(this.props.foods, (elem, index) => {
+      return (
+        <li
+          onClick={e => this.setSelected(e.target.textContent)}
+          key={index}
+          id={"listbox-" + index}
+          className="list-group-item"
+        >
+          {elem}
+        </li>
+      );
+    })
+  }
+
+  renderProdSearch = ({name, input, meta}) => {
     const className = `form-control ${
-      field.meta.touched && field.meta.error ? "is-invalid" : ""
+      meta.touched && meta.error ? "is-invalid" : ""
     }`;
     return (
       <React.Fragment>
         <input
           id="product-search"
-          name="product"
+          name={name}
           type="text"
           className={className}
           autoComplete="off"
           placeholder="Text product name"
-          {...field.input}
+          {...input}
         />
         <div className="text-danger">
-          {field.meta.touched ? field.meta.error : ""}
+          {meta.touched ? meta.error : ""}
         </div>
         <ul id="listbox" role="listbox" className="list-group">
-          {this.state.foods &&
-            field.input.value &&
-            _.map(this.state.foods, (elem, index) => {
-              return (
-                <li
-                  onClick={e => this.setSelected(e.target.textContent)}
-                  // onMouseOver={e => this.selectProduct(e.target.textContent)}
-                  key={index}
-                  id={"listbox-" + index}
-                  className="list-group-item"
-                >
-                  {elem}
-                </li>
-              );
-            })}
+          {meta.valid && this.renderHints()}
         </ul>
       </React.Fragment>
     );
   };
 
   render() {
-    // alert("rendering...")
     const onInputChange = _.debounce(query => {
       this.onInputChange(query);
     }, 800);
@@ -94,7 +77,13 @@ class productSearch extends Component {
   }
 }
 
+const mapStateToProps = ({productHints}) => {
+  return {
+    foods: productHints
+  }
+}
+
 export default connect(
-  null,
-  { change }
+  mapStateToProps,
+  { getProductsHints, clearProductsHints, change }
 )(productSearch);

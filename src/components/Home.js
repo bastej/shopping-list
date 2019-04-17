@@ -38,7 +38,7 @@ class Home extends Component {
       <div className="home">
         <div className="container">
           <Link
-            to="/createList"
+            to="/lists/create"
             className="btn btn-green btn-add-list text-white font-weight-bold"
           >
             <p>Create new list</p>

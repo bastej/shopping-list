@@ -1,6 +1,8 @@
 import "./CreateListView.scss";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Field, reduxForm } from 'redux-form';
+
 import { createNewList } from "../actions";
 import { setNavHeader } from "../actions";
 
@@ -13,16 +15,29 @@ class CreateListView extends Component {
     this.props.setNavHeader('Create shopping list');
   }
 
-  updateNewListName = e => {
-    const newListName = e.target.value;
-    this.setState({ newListName });
+  renderInput = ({ input, placeholder, meta }) => {
+    const className = `form-control ${meta.touched && meta.error ? "is-invalid" : ""}`;
+    return (
+      <div className="form-group">
+        <input
+          type={input.type}
+          className={className}
+          placeholder={placeholder}
+          autoComplete="off"
+          {...input}
+        />
+        <div className="text-danger">
+          {meta.touched ? meta.error : ""}
+        </div>
+      </div>
+    );
   };
 
-  // getCurrentClass = () => {
-  //     let classes = "btn btn-success input-group m-2 ";
-  //     classes += this.state.newListName ? "" : "disabled"
-  //     return classes;
-  // }
+  onSubmit = ({title}) => {
+    this.props.createNewList(title);
+    this.props.history.goBack();
+    alert("List created successfully");
+  }
 
   render() {
     return (
@@ -35,20 +50,21 @@ class CreateListView extends Component {
                   <h4>Create new list</h4>
                 </div>
                 <div className="card-body">
-                  <input
-                    onChange={this.updateNewListName}
-                    className="form-control m-2"
-                    type="text"
-                    placeholder="Text here list name..."
-                  />
-                  <button
-                    onClick={() =>
-                      this.props.createNewList(this.state.newListName)
-                    }
-                    className="btn btn-green btn-lg btn-block"
-                  >
-                    Create
-                  </button>
+                  <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                    <Field
+                      name="title"
+                      type="text"
+                      placeholder="Entry list title"
+                      component={this.renderInput}
+                    />
+                    <button
+                      type="submit"
+                      className="btn btn-green btn-lg btn-block"
+                    >
+                      Create
+                    </button>
+                  </form>
+                  
                 </div>
               </div>
             </div>
@@ -59,7 +75,20 @@ class CreateListView extends Component {
   }
 }
 
-export default connect(
-  null,
-  { createNewList, setNavHeader }
-)(CreateListView);
+function validate(values) {
+  const errors = {};
+  if (!values.title) {
+    errors.title = "Enter a title!";
+  }
+  return errors;
+}
+
+export default reduxForm({
+  validate,
+  form: "createList"
+})( 
+  connect(
+    null,
+    { createNewList, setNavHeader }
+  )(CreateListView)
+);

@@ -1,4 +1,4 @@
-import { SET_NAV_HEADER } from '../actions';
+import { SET_NAV_HEADER } from '../actions/types';
 
 export default function(state = '', action) {
     switch(action.type) {
