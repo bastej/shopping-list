@@ -1,10 +1,10 @@
-import "./CreateListView.scss";
+import "./CreateList.scss";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from 'redux-form';
 
-import { createNewList } from "../actions";
-import { setNavHeader } from "../actions";
+import { createNewList } from "../../actions";
+import { setNavHeader } from "../../actions";
 
 class CreateListView extends Component {
   state = {
@@ -34,9 +34,7 @@ class CreateListView extends Component {
   };
 
   onSubmit = ({title}) => {
-    this.props.createNewList(title);
-    this.props.history.goBack();
-    alert("List created successfully");
+    this.props.createNewList(title, this.props.history);
   }
 
   render() {

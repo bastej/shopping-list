@@ -12,66 +12,58 @@ import {
   CLEAR_PRODUCT_HINTS
 } from './types';
 
-export function createNewList(value) {
+export const createNewList = (value, history) => dispatch => {
   const list = {
     title: value,
     createDate: new Date().toLocaleString()
   };
-  return {
-    type: CREATE_NEW_LIST,
-    payload: list
-  };
+  dispatch({ type: CREATE_NEW_LIST, payload: list });
+  history.push('/');
 }
 
-export function addProduct(values, listID) {
-
-  return async function(dispatch) {
-    const response = await nutritionixAPI.get("/search/instant/",
-      {
-        params: {
-          common_general: true,
-          detailed: true,
-          claims: true,
-          branded: false,
-          query: values.name
-        }
+export const addProduct = (values, listID) => async (dispatch) => {
+  const response = await nutritionixAPI.get("/search/instant/",
+    {
+      params: {
+        common_general: true,
+        detailed: true,
+        claims: true,
+        branded: false,
+        query: values.name
       }
-    );
-
-    const responseData = response.data.common[0];
-    const { food_name, photo, claims, serving_weight_grams, full_nutrients } = responseData;
-
-    const payload = {
-      responseData,
-      product: {
-        name: food_name,
-        photo: photo.thumb,
-        tags: claims,
-        serving_weight_grams: serving_weight_grams,
-        calories: full_nutrients[
-          //find obj key by attr_id prop and return obj value prop 
-          _.findKey(full_nutrients, el => el.attr_id === 208)
-        ].value.toFixed(0),
-        carbohydrates: full_nutrients[
-          _.findKey(full_nutrients, el => el.attr_id === 205)
-        ].value.toFixed(1),
-        proteins: full_nutrients[
-          _.findKey(full_nutrients, el => el.attr_id === 203)
-        ].value.toFixed(1),
-        fats: full_nutrients[
-          _.findKey(full_nutrients, el => el.attr_id === 204)
-        ].value.toFixed(1),
-        category: values.category,
-        count: parseInt(values.count)
-      },
-      listID
     }
+  );
 
-    dispatch({
-      type: ADD_PRODUCT,
-      payload
-    });
+  const responseData = response.data.common[0];
+  const { food_name, photo, claims, serving_weight_grams, full_nutrients } = responseData;
+
+  const payload = {
+    responseData,
+    product: {
+      name: food_name,
+      photo: photo.thumb,
+      tags: claims,
+      serving_weight_grams: serving_weight_grams,
+      calories: full_nutrients[
+        //find obj key by attr_id prop and return obj value prop 
+        _.findKey(full_nutrients, el => el.attr_id === 208)
+      ].value.toFixed(0),
+      carbohydrates: full_nutrients[
+        _.findKey(full_nutrients, el => el.attr_id === 205)
+      ].value.toFixed(1),
+      proteins: full_nutrients[
+        _.findKey(full_nutrients, el => el.attr_id === 203)
+      ].value.toFixed(1),
+      fats: full_nutrients[
+        _.findKey(full_nutrients, el => el.attr_id === 204)
+      ].value.toFixed(1),
+      category: values.category,
+      count: parseInt(values.count)
+    },
+    listID
   }
+
+  dispatch({ type: ADD_PRODUCT, payload });
 }
 
 export function addCategory(name) {
@@ -116,23 +108,17 @@ export function setNavHeader(text, tag) {
   }
 }
 
-export function getProductsHints(query) {
+export const getProductsHints = (query) => async (dispatch) => {
+  const request = await nutritionixAPI.get(`/search/instant/`, {
+    params: {
+      common_general: true,
+      branded: false,
+      query: query
+    }
+  });
+  const payload = _.map(request.data.common, elem => elem.food_name);
 
-  return async function(dispatch) {
-    const request = await nutritionixAPI.get(`/search/instant/`, {
-      params: {
-        common_general: true,
-        branded: false,
-        query: query
-      }
-    });
-    const payload = _.map(request.data.common, elem => elem.food_name);
-
-    dispatch({
-      type: GET_PRODUCT_HINTS,
-      payload
-    });
-  }
+  dispatch({ type: GET_PRODUCT_HINTS, payload });
 }
 
 export function clearProductsHints() {

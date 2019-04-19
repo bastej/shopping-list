@@ -3,10 +3,10 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import Product from "./Product";
-import AddProductForm from "./AddProductForm";
-import NutrientsTable from "./NutrientsTable";
-import { setNavHeader } from '../actions';
+import Product from "../Product";
+import AddProductForm from "../AddProductForm";
+import NutrientsTable from "../NutrientsTable";
+import { setNavHeader } from '../../actions';
 
 class SingleList extends Component {
   // state = {

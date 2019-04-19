@@ -1,8 +1,8 @@
-import "./SingleListPreview.scss";
+import "./SingleListSnippet.scss";
 import React from "react";
 import { Link } from "react-router-dom";
 import _ from "lodash";
-import { deleteList } from "../actions";
+import { deleteList } from "../../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 

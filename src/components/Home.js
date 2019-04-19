@@ -6,12 +6,14 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Product from "./Product";
-import SingleListPreview from "./SingleListPreview";
+import SingleListPreview from "./lists/SingleListSnippet";
 import { setNavHeader } from '../actions';
 
 class Home extends Component {
+
   componentDidMount() {
-    this.props.setNavHeader('Shopping list App');
+    this.props.setNavHeader('Shopping list App'); 
+    
     $(".product .nutrients-switch").click(function() {
       const box = this.parentElement.parentElement.querySelector(".nutrients");
       if ($(this).attr("data-switch") === "false") {

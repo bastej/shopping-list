@@ -4,10 +4,10 @@ import React, { Component } from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
 
 import Home from "./components/Home";
-import CreateListView from "./components/CreateListView";
-import SingleList from "./components/SingleList";
-import AllLists from "./components/AllLists";
 import Navbar from "./components/Navbar";
+import CreateListView from "./components/lists/CreateList";
+import SingleList from "./components/lists/SingleList";
+import AllLists from "./components/lists/AllLists";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {

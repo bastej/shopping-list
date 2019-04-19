@@ -1,14 +1,24 @@
 import "./Product.scss";
-import React from "react";
+import React, { Component } from "react";
 import _ from "lodash";
 import { deleteProduct, updateProductCount } from "../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 
-const Product = props => {
-  const { product, match, list, parentComponent } = props;
-  const renderContent = () => {
+class Product extends Component {
 
+  constructor(props) {
+    super(props);
+    // this.productShowDetails = React.createRef();
+  }
+
+  componentDidMount() {
+    // console.log(typeof this.productShowDetails.current);
+    // this.productShowDetails.current.onClick = () => alert(2);
+  }
+
+  renderContent = () => {
+    const { product, match, list, parentComponent } = this.props;
     // TODO uzyc nesting comp ?
     //SingleList Product render
     if (parentComponent === "SingleList") {
@@ -84,7 +94,7 @@ const Product = props => {
           )}
 
           <button
-            onClick={() => props.deleteProduct(list.id, product.id)}
+            onClick={() => this.props.deleteProduct(list.id, product.id)}
             className="btn btn-sm btn-green delete-btn float-right"
           >
             <FontAwesomeIcon className="fa-md" icon="times" />
@@ -92,7 +102,7 @@ const Product = props => {
           <div className="btn-group float-right">
             <button
               onClick={() =>
-                props.updateProductCount(list.id, product.id, "increment")
+                this.props.updateProductCount(list.id, product.id, "increment")
               }
               className="btn btn-sm btn-lightgreen"
             >
@@ -100,7 +110,7 @@ const Product = props => {
             </button>
             <button
               onClick={() =>
-                props.updateProductCount(list.id, product.id, "decrement")
+                this.props.updateProductCount(list.id, product.id, "decrement")
               }
               className="btn btn-sm btn-lightgreen"
             >
@@ -123,7 +133,7 @@ const Product = props => {
             </div>
 
             <div>
-                <div>
+                <div>{/* ref={this.productShowDetails} */}
                   <FontAwesomeIcon
                     data-switch="false"
                     className="fa-lg nutrients-switch"
@@ -150,9 +160,15 @@ const Product = props => {
       );
     }
   };
-  //Component render
-  return renderContent();
-};
+
+  render() { 
+    return ( 
+      <div>
+        {this.renderContent()}
+      </div>
+     );
+  }
+}
 
 export default connect(
   null,

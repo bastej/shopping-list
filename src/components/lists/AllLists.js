@@ -2,8 +2,8 @@ import "./AllLists.scss";
 import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
-import { setNavHeader } from "../actions";
-import SingleListPreview from "./SingleListPreview";
+import { setNavHeader } from "../../actions";
+import SingleListPreview from "./SingleListSnippet";
 
 class AllLists extends Component {
   
