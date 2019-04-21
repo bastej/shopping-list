@@ -1,14 +1,14 @@
 import {
-  CREATE_NEW_LIST,
+  CREATE_NEW_CART,
   ADD_PRODUCT,
   UPDATE_PRODUCT_COUNT,
   DELETE_PRODUCT,
-  DELETE_LIST
+  DELETE_CART
 } from "../actions/types";
 
 import _ from "lodash";
 
-const INITIAL_LISTS = {
+const INITIAL_CARTS = {
   0: {
     id: 0,
     title: "Christmas shopping",
@@ -145,8 +145,8 @@ const INITIAL_LISTS = {
         count: 4,
         photo: "https://d2xdmhkmkbyw75.cloudfront.net/1031_thumb.jpg"
       },
-      3: {
-        id: 3,
+      2: {
+        id: 2,
         name: "flour",
         category: "other",
         serving_weight_grams: 125,
@@ -277,21 +277,21 @@ const INITIAL_LISTS = {
   }
 };
 
-export default function(state = INITIAL_LISTS, action) {
+export default function(state = INITIAL_CARTS, action) {
   switch (action.type) {
-    case CREATE_NEW_LIST: {
+    case CREATE_NEW_CART: {
       const index = _.size(state) || 0;
       return { ...state, [index]: { id: index, ...action.payload } };
     }
     case ADD_PRODUCT: {
-      const { product, listID } = action.payload;
-      const productID = _.size(state[listID].productsList) || 0;
+      const { product, cartID } = action.payload;
+      const productID = _.size(state[cartID].productsList) || 0;
       return {
         ...state,
-        [listID]: {
-          ...state[listID],
+        [cartID]: {
+          ...state[cartID],
           productsList: {
-            ...state[listID].productsList,
+            ...state[cartID].productsList,
             [productID]: {
               id: productID,
               ...product
@@ -301,13 +301,13 @@ export default function(state = INITIAL_LISTS, action) {
       };
     }
     case UPDATE_PRODUCT_COUNT: {
-      const { listID, productID, type } = action.payload;
-      const { count } = state[listID].productsList[productID];
-      const { productsList } = state[listID];
+      const { cartID, productID, type } = action.payload;
+      const { count } = state[cartID].productsList[productID];
+      const { productsList } = state[cartID];
       return {
         ...state,
-        [listID]: {
-          ...state[listID],
+        [cartID]: {
+          ...state[cartID],
           productsList: {
             ...productsList,
             [productID]: {
@@ -324,18 +324,18 @@ export default function(state = INITIAL_LISTS, action) {
       };
     }
     case DELETE_PRODUCT: {
-      const { listID, productID } = action.payload;
+      const { cartID, productID } = action.payload;
       return {
         ...state,
-        [listID]: {
-          ...state[listID],
-          productsList: _.omit(state[listID].productsList, productID)
+        [cartID]: {
+          ...state[cartID],
+          productsList: _.omit(state[cartID].productsList, productID)
         }
       };
     }
-    case DELETE_LIST: {
-      const { listID } = action.payload;
-      return _.omit(state, listID);
+    case DELETE_CART: {
+      const { cartID } = action.payload;
+      return _.omit(state, cartID);
     }
     default:
       return state;

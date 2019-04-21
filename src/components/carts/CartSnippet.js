@@ -1,35 +1,35 @@
-import "./SingleListSnippet.scss";
+import "./CartSnippet.scss";
 import React from "react";
 import { Link } from "react-router-dom";
 import _ from "lodash";
-import { deleteList } from "../../actions";
+import { deleteCart } from "../../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 
-const SingleListPreview = props => {
-  const { list, deleteList } = props;
+const CartSnippet = props => {
+  const { cart, deleteCart } = props;
   return (
     <div className="single-list-preview">
-      <h4>{list.title}</h4>
+      <h4>{cart.title}</h4>
       <hr />
       <div className="badge badge-warning">
-        Products: {_.size(list.productsList)}
+        Products: {_.size(cart.productsList)}
       </div>
       <div title="Created">
-        <FontAwesomeIcon className="fa-sm" icon="calendar" /> {list.createDate}
+        <FontAwesomeIcon className="fa-sm" icon="calendar" /> {cart.createDate}
       </div>
       <button
-        onClick={() => deleteList(list.id)}
+        onClick={() => deleteCart(cart.id)}
         className="btn btn-sm btn-outline-lightgreen btn-delete"
         title="Delete"
       >
         <FontAwesomeIcon className="fa-md" icon="times" />
       </button>
       <Link
-        to={`/lists/${list.id}`}
+        to={`/carts/${cart.id}`}
         className="btn btn-green btn-block btn-open-list"
       >
-        Open list
+        Open cart
       </Link>
     </div>
   );
@@ -37,5 +37,5 @@ const SingleListPreview = props => {
 
 export default connect(
   null,
-  { deleteList }
-)(SingleListPreview);
+  { deleteCart }
+)(CartSnippet);

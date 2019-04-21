@@ -1,18 +1,18 @@
-import "./CreateList.scss";
+import "./CartCreate.scss";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Field, reduxForm } from 'redux-form';
 
-import { createNewList } from "../../actions";
+import { createNewCart } from "../../actions";
 import { setNavHeader } from "../../actions";
 
-class CreateListView extends Component {
+class CartCreate extends Component {
   state = {
     newListName: ""
   };
 
   componentDidMount() {
-    this.props.setNavHeader('Create shopping list');
+    this.props.setNavHeader('Create shopping cart');
   }
 
   renderInput = ({ input, placeholder, meta }) => {
@@ -34,7 +34,7 @@ class CreateListView extends Component {
   };
 
   onSubmit = ({title}) => {
-    this.props.createNewList(title, this.props.history);
+    this.props.createNewCart(title, this.props.history);
   }
 
   render() {
@@ -45,14 +45,14 @@ class CreateListView extends Component {
             <div className="col-lg-6 col-md-12 offset-lg-3">
               <div className="card">
                 <div className="card-header bg-lightblue text-white">
-                  <h4>Create new list</h4>
+                  <h4>Create new cart</h4>
                 </div>
                 <div className="card-body">
                   <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                     <Field
                       name="title"
                       type="text"
-                      placeholder="Entry list title"
+                      placeholder="Entry cart title"
                       component={this.renderInput}
                     />
                     <button
@@ -83,10 +83,10 @@ function validate(values) {
 
 export default reduxForm({
   validate,
-  form: "createList"
+  form: "createCart"
 })( 
   connect(
     null,
-    { createNewList, setNavHeader }
-  )(CreateListView)
+    { createNewCart, setNavHeader }
+  )(CartCreate)
 );

@@ -33,10 +33,10 @@ const Navbar = props => {
           {renderHeader(header)}
           <NavLink
             exact
-            to={"/lists"}
+            to={"/carts"}
             className="btn btn-outline-green all-list-btn"
           >
-            <FontAwesomeIcon icon="shopping-basket" /> <span>All lists</span>
+            <FontAwesomeIcon icon="shopping-basket" /> <span>All carts</span>
           </NavLink>
         </div>
       </nav>

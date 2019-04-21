@@ -18,10 +18,10 @@ class Product extends Component {
   }
 
   renderContent = () => {
-    const { product, match, list, parentComponent } = this.props;
+    const { product, match, cart, parentComponent } = this.props;
     // TODO uzyc nesting comp ?
-    //SingleList Product render
-    if (parentComponent === "SingleList") {
+    //Singlecart Product render
+    if (parentComponent === "Cart") {
       return (
         <div className="product">
           <div className="badge badge-info">{product.count}</div>
@@ -94,7 +94,7 @@ class Product extends Component {
           )}
 
           <button
-            onClick={() => this.props.deleteProduct(list.id, product.id)}
+            onClick={() => this.props.deleteProduct(cart.id, product.id)}
             className="btn btn-sm btn-green delete-btn float-right"
           >
             <FontAwesomeIcon className="fa-md" icon="times" />
@@ -102,7 +102,7 @@ class Product extends Component {
           <div className="btn-group float-right">
             <button
               onClick={() =>
-                this.props.updateProductCount(list.id, product.id, "increment")
+                this.props.updateProductCount(cart.id, product.id, "increment")
               }
               className="btn btn-sm btn-lightgreen"
             >
@@ -110,7 +110,7 @@ class Product extends Component {
             </button>
             <button
               onClick={() =>
-                this.props.updateProductCount(list.id, product.id, "decrement")
+                this.props.updateProductCount(cart.id, product.id, "decrement")
               }
               className="btn btn-sm btn-lightgreen"
             >

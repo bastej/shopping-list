@@ -25,12 +25,12 @@ const AddProductForm = props => {
   };
 
   const onSubmit = values => {
-    props.addProduct(values, listID);
+    props.addProduct(values, cartID);
     props.addCategory(values.category);
     props.reset("addProduct");
   };
 
-  const { handleSubmit, listID } = props;
+  const { handleSubmit, cartID } = props;
   return (
     <div className="add-product-form">
       <form
@@ -49,7 +49,7 @@ const AddProductForm = props => {
           className="btn btn-green btn-block font-weight-bold"
           type="submit"
         >
-          Add to List
+          Add to cart
         </button>
       </form>
     </div>

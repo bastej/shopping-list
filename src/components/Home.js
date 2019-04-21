@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Product from "./Product";
-import SingleListPreview from "./lists/SingleListSnippet";
+import CartSnippet from "./carts/CartSnippet";
 import { setNavHeader } from '../actions';
 
 class Home extends Component {
@@ -31,29 +31,29 @@ class Home extends Component {
   }
 
   render() {
-    const { lists, products, categories } = this.props;
+    const { carts, products, categories } = this.props;
     //get 3 latest list
-    const lastestList = _.filter(lists, (el, index) => {
-      return index > _.size(lists) - 4;
+    const lastestCarts = _.filter(carts, (el, index) => {
+      return index > _.size(carts) - 4;
     });
     return (
       <div className="home">
         <div className="container">
           <Link
-            to="/lists/create"
+            to="/carts/create"
             className="btn btn-green btn-add-list text-white font-weight-bold"
           >
-            <p>Create new list</p>
+            <p>Create new cart</p>
             <FontAwesomeIcon className="fa-lg" icon="plus" />
           </Link>
           <div className="row">
             <div className="col-12">
-              <h3>Recent lists:</h3>
+              <h3>Recent carts:</h3>
             </div>
-            {_.map(lastestList, list => {
+            {_.map(lastestCarts, cart=> {
               return (
-                <div key={list.id} className="col-12 col-lg-4">
-                  <SingleListPreview list={list} />
+                <div key={cart.id} className="col-12 col-lg-4">
+                  <CartSnippet cart={cart} />
                 </div>
               );
             })}
@@ -88,9 +88,9 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps({ lists, products, categories }) {
+function mapStateToProps({ carts, products, categories }) {
   return {
-    lists,
+    carts,
     products,
     categories
   };

@@ -1,18 +1,20 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
-import ListsReducer from "./reducer_lists";
+import CartsReducer from "./reducer_carts";
 import ProductsReducer from "./reducer_products";
 import CategoriesReducer from "./reducer_categories";
 import NavbarReducer from "./reducer_navbar";
-import productHintsReducer from "./reducer_productHints";
+import ProductHintsReducer from "./reducer_productHints";
+import CurrentListNutrientsReducer from "./reducer_currentListNutrients";
 
 const rootReducer = combineReducers({
-  lists: ListsReducer,
+  carts: CartsReducer,
   products: ProductsReducer,
   categories: CategoriesReducer,
   currentNavHeader: NavbarReducer,
   form: formReducer,
-  productHints: productHintsReducer 
+  productHints: ProductHintsReducer,
+  currentListNutrients: CurrentListNutrientsReducer 
 });
 
 export default rootReducer;

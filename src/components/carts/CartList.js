@@ -1,31 +1,31 @@
-import "./AllLists.scss";
+import "./CartList.scss";
 import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { setNavHeader } from "../../actions";
-import SingleListPreview from "./SingleListSnippet";
+import CartSnippet from "./CartSnippet";
 
-class AllLists extends Component {
+class CartList extends Component {
   
   componentDidMount() {
-    this.props.setNavHeader("All lists", _.size(this.props.lists));
+    this.props.setNavHeader("All carts", _.size(this.props.carts));
   }
 
   componentDidUpdate() {
-    this.props.setNavHeader("All lists", _.size(this.props.lists));
+    this.props.setNavHeader("All carts", _.size(this.props.carts));
   }
 
   render() { 
-  const { lists } = this.props;
+  const { carts } = this.props;
     return ( 
       <div className="all-lists">
         <div className="container">
-          <h3>Lists:</h3>
+          <h3>Carts:</h3>
           <div className="row">
-            {_.map(lists, list => {
+            {_.map(carts, list => {
               return (
                 <div key={list.id} className="col-12">
-                  <SingleListPreview list={list} />
+                  <CartSnippet list={list} />
                 </div>
               );
             })}
@@ -36,13 +36,13 @@ class AllLists extends Component {
   }
 }
 
-function mapStateToProps({ lists }) {
+function mapStateToProps({ carts }) {
   return {
-    lists
+    carts
   };
 }
 
 export default connect(
   mapStateToProps,
   { setNavHeader }
-)(AllLists);
+)(CartList);

@@ -167,7 +167,7 @@ export default function(state = INITIAL_PORDUCTS, action) {
           }
         };
       } else {
-        //add prod to all prod list
+        //add prod to list of all products 
         return {
           ...state,
           [index]: {

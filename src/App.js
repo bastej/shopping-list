@@ -5,9 +5,9 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
-import CreateListView from "./components/lists/CreateList";
-import SingleList from "./components/lists/SingleList";
-import AllLists from "./components/lists/AllLists";
+import CartCreate from "./components/carts/CartCreate";
+import Cart from "./components/carts/Cart";
+import CartList from "./components/carts/CartList";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -37,9 +37,9 @@ class App extends Component {
           <main>
             <Navbar />
             <Switch>
-              <Route path="/lists/create" component={CreateListView} />
-              <Route path="/lists/:id" component={SingleList} />
-              <Route path="/lists" component={AllLists} />
+              <Route path="/carts/create" component={CartCreate} />
+              <Route path="/carts/:id" component={Cart} />
+              <Route path="/carts" component={CartList} />
               <Route path="/" component={Home} />
             </Switch>
           </main>

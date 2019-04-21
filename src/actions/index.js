@@ -1,27 +1,28 @@
 import _ from "lodash";
 import { nutritionixAPI } from "../api/nutritionix";
 import {
-  CREATE_NEW_LIST,
+  CREATE_NEW_CART,
   ADD_PRODUCT,
   UPDATE_PRODUCT_COUNT,
   DELETE_PRODUCT,
-  DELETE_LIST,
+  DELETE_CART,
   ADD_CATEGORY,
   SET_NAV_HEADER,
   GET_PRODUCT_HINTS,
-  CLEAR_PRODUCT_HINTS
+  CLEAR_PRODUCT_HINTS,
+  CALCULATE_NUTRIENTS
 } from './types';
 
-export const createNewList = (value, history) => dispatch => {
-  const list = {
+export const createNewCart = (value, history) => dispatch => {
+  const cart = {
     title: value,
     createDate: new Date().toLocaleString()
   };
-  dispatch({ type: CREATE_NEW_LIST, payload: list });
+  dispatch({ type: CREATE_NEW_CART, payload: cart });
   history.push('/');
 }
 
-export const addProduct = (values, listID) => async (dispatch) => {
+export const addProduct = (values, cartID) => async (dispatch) => {
   const response = await nutritionixAPI.get("/search/instant/",
     {
       params: {
@@ -60,7 +61,7 @@ export const addProduct = (values, listID) => async (dispatch) => {
       category: values.category,
       count: parseInt(values.count)
     },
-    listID
+    cartID
   }
 
   dispatch({ type: ADD_PRODUCT, payload });
@@ -73,31 +74,31 @@ export function addCategory(name) {
   };
 }
 
-export function updateProductCount(listID, productID, type) {
+export function updateProductCount(cartID, productID, type) {
   return {
     type: UPDATE_PRODUCT_COUNT,
     payload: {
       type,
-      listID,
+      cartID,
       productID
     }
   };
 }
 
-export function deleteProduct(listID, productID) {
+export function deleteProduct(cartID, productID) {
   return {
     type: DELETE_PRODUCT,
     payload: {
-      listID,
+      cartID,
       productID
     }
   };
 }
 
-export function deleteList(listID) {
+export function deleteCart(cartID) {
   return {
-    type: DELETE_LIST,
-    payload: { listID }
+    type: DELETE_CART,
+    payload: { cartID }
   };
 }
 
@@ -124,5 +125,23 @@ export const getProductsHints = (query) => async (dispatch) => {
 export function clearProductsHints() {
   return {
     type: CLEAR_PRODUCT_HINTS
+  }
+}
+
+export function calculateNutrients(productsList) {
+  let calories = 0,
+    carbohydrates = 0,
+    proteins = 0,
+    fats = 0;
+  _.map(productsList, product => {
+    product.calories && (calories += product.calories * product.count);
+    product.carbohydrates && (carbohydrates += product.carbohydrates * product.count);
+    product.proteins && (proteins += product.proteins * product.count);
+    product.fats && (fats += product.fats * product.count);
+  });
+
+  return {
+    type: CALCULATE_NUTRIENTS,
+    payload: {calories, carbohydrates, proteins, fats}
   }
 }
