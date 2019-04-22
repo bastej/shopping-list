@@ -1,6 +1,5 @@
 @import "./styles/colors";
 
-//single list products style
 .product {
   padding: 30px;
   border: 1px solid #eee;
@@ -73,101 +72,5 @@
     background-color: white;
     width: 120px;
     border: 2px solid;
-  }
-}
-
-//home products style
-li {
-  padding: 0 !important;
-  margin: 10px 0;
-  .product {
-    text-align: left;
-    border-radius: unset;
-    margin: 0;
-    .product-img {
-      max-width: 35px;
-      height: auto;
-      max-height: 35px;
-      margin: auto 0 auto 12px;
-    }
-    .products-info {
-      width: 100%;
-      .nutrients-box {
-        font-size: 13px;
-      }
-      .tags-box {
-        text-align: right;
-        span {
-          margin: auto 2px;
-        }
-      }
-    }
-    .name {
-      font-weight: bold;
-      margin: 10px;
-      color: #444444;
-    }
-    .badge-times {
-      padding: 10px 6px;
-    }
-    .badge-category {
-      background-color: white;
-      width: 120px;
-      border: 2px solid;
-      .category-img {
-        width: 20px;
-      }
-    }
-  }
-} 
-
-
-//categories colors config
-[data-category="meat"] {
-  .badge-category {
-    border-color: #fda2a2 !important;
-    color: #fda2a2 !important;
-  }
-}
-[data-category="dairy"] {
-  .badge-category {
-    border-color: lightgrey !important;
-    color: lightgrey !important;
-  }
-}
-[data-category="bread"] {
-  .badge-category {
-    border-color: #b79569 !important;
-    color: #b79569 !important;
-  }
-}
-[data-category="vegetables"] {
-  .badge-category {
-    border-color: #90bc90 !important;
-    color: #90bc90 !important;
-  }
-}
-[data-category="fruits"] {
-  .badge-category {
-    border-color: #ffd9a4 !important;
-    color: #ffd9a4 !important;
-  }
-}
-[data-category="frozen-food"] {
-  .badge-category {
-    border-color: #aee5e4 !important;
-    color: #aee5e4 !important;
-  }
-}
-[data-category="sweets"] {
-  .badge-category {
-    border-color: #d9a7b8 !important;
-    color: #d9a7b8 !important;
-  }
-}
-[data-category="drinks"] {
-  .badge-category {
-    border-color: #ffebce !important;
-    color: #ffebce !important;
   }
 }

@@ -15,6 +15,16 @@ class CartList extends Component {
     this.props.setNavHeader("All carts", _.size(this.props.carts));
   }
 
+  renderCarts = (carts) => {
+    return _.map(carts, list => {
+      return (
+        <div key={list.id} className="col-12">
+          <CartSnippet list={list} />
+        </div>
+      );
+    })
+  }
+
   render() { 
   const { carts } = this.props;
     return ( 
@@ -22,13 +32,7 @@ class CartList extends Component {
         <div className="container">
           <h3>Carts:</h3>
           <div className="row">
-            {_.map(carts, list => {
-              return (
-                <div key={list.id} className="col-12">
-                  <CartSnippet list={list} />
-                </div>
-              );
-            })}
+            {this.renderCarts(carts)}
           </div>
         </div>
       </div>

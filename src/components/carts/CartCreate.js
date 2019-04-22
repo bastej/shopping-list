@@ -7,9 +7,6 @@ import { createNewCart } from "../../actions";
 import { setNavHeader } from "../../actions";
 
 class CartCreate extends Component {
-  state = {
-    newListName: ""
-  };
 
   componentDidMount() {
     this.props.setNavHeader('Create shopping cart');

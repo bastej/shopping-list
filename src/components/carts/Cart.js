@@ -19,8 +19,22 @@ class Cart extends Component {
     this.props.calculateNutrients(this.props.cart.productsList);
   }
 
-  render() {
+  renderProducts = (cart, categories) => {
+    return _.map(cart.productsList, product => {
+      let match = _.find(categories, { name: product.category });
+      return (
+        <li key={product.id} className="list-group-item">
+          <Product
+            product={product}
+            cart={cart}
+            match={match}
+          />
+      </li>
+      );
+    })
+  }
 
+  render() {
     const { cart, categories } = this.props;
     if (!cart) {
       return (
@@ -45,19 +59,7 @@ class Cart extends Component {
           <div className="row products-list">
             <div className="col">
               <ul className="list-group">
-                {_.map(cart.productsList, product => {
-                  let match = _.find(categories, { name: product.category });
-                  return (
-                    <li key={product.id} className="list-group-item">
-                      <Product
-                        product={product}
-                        cart={cart}
-                        match={match}
-                        parentComponent={"Cart"}
-                      />
-                  </li>
-                  );
-                })}
+                {this.renderProducts(cart, categories)}
               </ul>
             </div>
           </div>
@@ -72,7 +74,7 @@ class Cart extends Component {
   }
 }
 
-function mapStateToProps({ carts, products, categories }, ownProps) {
+const mapStateToProps = ({ carts, products, categories }, ownProps) => {
   return {
     cart: carts[ownProps.match.params.id],
     products,

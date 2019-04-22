@@ -1,0 +1,45 @@
+@import "./styles/colors";
+
+li {
+  padding: 0 !important;
+  margin: 10px 0;
+  .product {
+    text-align: left;
+    border-radius: unset;
+    margin: 0;
+    .product-img {
+      max-width: 35px;
+      height: auto;
+      max-height: 35px;
+      margin: auto 0 auto 12px;
+    }
+    .products-info {
+      width: 100%;
+      .nutrients-box {
+        font-size: 13px;
+      }
+      .tags-box {
+        text-align: right;
+        span {
+          margin: auto 2px;
+        }
+      }
+    }
+    .name {
+      font-weight: bold;
+      margin: 10px;
+      color: #444444;
+    }
+    .badge-times {
+      padding: 10px 6px;
+    }
+    .badge-category {
+      background-color: white;
+      width: 120px;
+      border: 2px solid;
+      .category-img {
+        width: 20px;
+      }
+    }
+  }
+} 

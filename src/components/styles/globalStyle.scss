@@ -1,0 +1,102 @@
+@import "colors";
+
+#root{
+  background-color: $lightGray !important;
+  min-height: 100vh;
+}
+
+//btn
+.btn-green {
+  background-color: $darkGreen;
+  border-color: $darkGreen;
+  color: #ffffff;
+  &:hover {
+    color: #ffffff;
+  }
+}
+    
+    
+.btn-outline-green {
+  background-color: #ffffff;
+  border: 1px solid $darkGreen !important;
+  color: $darkGreen;
+  &:hover {
+    background-color: $darkGreen;
+    color: #ffffff;
+  }
+}
+    
+
+.btn-lightgreen {
+  background-color: $lightGreen;
+  border-color: $lightGreen;
+  color: #ffffff;
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.btn-outline-lightgreen {
+  background-color: #ffffff;
+  border: 1px solid $lightGreen !important;
+  color: $lightGreen;
+  &:hover {
+    background-color: $lightGreen;
+    color: #ffffff;
+  }
+}
+  
+//bg
+.bg-lightblue {
+  background-color: $lightBlue !important;
+}
+    
+//categories colors config
+[data-category="meat"] {
+  .badge-category {
+    border-color: #fda2a2 !important;
+    color: #fda2a2 !important;
+  }
+}
+[data-category="dairy"] {
+  .badge-category {
+    border-color: lightgrey !important;
+    color: lightgrey !important;
+  }
+}
+[data-category="bread"] {
+  .badge-category {
+    border-color: #b79569 !important;
+    color: #b79569 !important;
+  }
+}
+[data-category="vegetables"] {
+  .badge-category {
+    border-color: #90bc90 !important;
+    color: #90bc90 !important;
+  }
+}
+[data-category="fruits"] {
+  .badge-category {
+    border-color: #ffd9a4 !important;
+    color: #ffd9a4 !important;
+  }
+}
+[data-category="frozen-food"] {
+  .badge-category {
+    border-color: #aee5e4 !important;
+    color: #aee5e4 !important;
+  }
+}
+[data-category="sweets"] {
+  .badge-category {
+    border-color: #d9a7b8 !important;
+    color: #d9a7b8 !important;
+  }
+}
+[data-category="drinks"] {
+  .badge-category {
+    border-color: #ffebce !important;
+    color: #ffebce !important;
+  }
+}

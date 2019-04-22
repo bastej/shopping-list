@@ -17,156 +17,93 @@ class Product extends Component {
     // this.productShowDetails.current.onClick = () => alert(2);
   }
 
-  renderContent = () => {
-    const { product, match, cart, parentComponent } = this.props;
-    // TODO uzyc nesting comp ?
-    //Singlecart Product render
-    if (parentComponent === "Cart") {
+  renderProductInfo = (product) => {
+    const { serving_weight_grams, calories, carbohydrates, proteins, fats, count } = product;
+    if(product.calories) {
       return (
-        <div className="product">
-          <div className="badge badge-info">{product.count}</div>
-          {product.photo && <img className="product-img" alt={product.name} src={product.photo} />}
-          <span className="name">{" " + product.name}</span>
-          <div
-            className="btn btn-sm category-box"
-            data-category={product.category}
-          >
-            <div className="badge badge-category">
-              {product.category + " "}
-              {match && <img src={match.img} alt={product.category} className="category-img" />}
-            </div>
-          </div>
-
-          {product.calories && (
-            <div className="products-info">
-              <div className="row">
-                <div className="col-12 col-lg-6">
-                  <div className="nutrients-box">
-                    <span>
-                      Portion:{" "}
-                      {product.serving_weight_grams
-                        ? product.count * product.serving_weight_grams
-                        : "0.0"}
-                    </span>
-                    <span>
-                      {" "}
-                      | Calories:{" "}
-                      {product.calories
-                        ? product.count * product.calories
-                        : "0.0"}
-                    </span>
-                    <span>
-                      {" "}
-                      | Carbohydrates:{" "}
-                      {product.carbohydrates
-                        ? (product.count * product.carbohydrates).toFixed(1)
-                        : "0.0"}
-                    </span>
-                    <span>
-                      {" "}
-                      | Proteins:{" "}
-                      {product.proteins
-                        ? (product.count * product.proteins).toFixed(1)
-                        : "0.0"}
-                    </span>
-                    <span>
-                      {" "}
-                      | Fats:{" "}
-                      {product.fats
-                        ? (product.count * product.fats).toFixed(1)
-                        : "0.0"}
-                    </span>
-                  </div>
-                </div>
-                <div className="col-12 col-lg-6">
-                  <div className="tags-box">
-                    {_.map(product.tags, (tag, id) => {
-                      return (
-                        <span key={id} className="badge badge-warning">
-                          {tag}
-                        </span>
-                      );
-                    })}
-                  </div>
-                </div>
+        <div className="products-info">
+          <div className="row">
+            <div className="col-12 col-lg-6">
+              <div className="nutrients-box">
+                <span>
+                  Portion:{" "}{serving_weight_grams ? count * serving_weight_grams: "0.0"}
+                </span>
+                <span>
+                  {" "} | Calories:{" "}{calories ? count * calories : "0.0"}
+                </span>
+                <span>
+                  {" "}| Carbohydrates:{" "}{carbohydrates ? (count * carbohydrates).toFixed(1): "0.0"}
+                </span>
+                <span>
+                  {" "}| Proteins:{" "}{proteins ? (count * proteins).toFixed(1) : "0.0"}
+                </span>
+                <span>
+                  {" "} | Fats:{" "}{fats ? (count * fats).toFixed(1) : "0.0"}
+                </span>
               </div>
             </div>
-          )}
-
-          <button
-            onClick={() => this.props.deleteProduct(cart.id, product.id)}
-            className="btn btn-sm btn-green delete-btn float-right"
-          >
-            <FontAwesomeIcon className="fa-md" icon="times" />
-          </button>
-          <div className="btn-group float-right">
-            <button
-              onClick={() =>
-                this.props.updateProductCount(cart.id, product.id, "increment")
-              }
-              className="btn btn-sm btn-lightgreen"
-            >
-              <FontAwesomeIcon className="fa-md" icon="angle-up" />
-            </button>
-            <button
-              onClick={() =>
-                this.props.updateProductCount(cart.id, product.id, "decrement")
-              }
-              className="btn btn-sm btn-lightgreen"
-            >
-              <FontAwesomeIcon className="fa-md" icon="angle-down" />
-            </button>
+            <div className="col-12 col-lg-6">
+              <div className="tags-box">
+                {_.map(product.tags, (tag, id) => {
+                  return (
+                    <span key={id} className="badge badge-warning">
+                      {tag}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
-      );
-      //Home Product render
-    } else if (parentComponent === "Home") {
-      return (
-          <div className="product">
-            <div className="badge badge-info badge-times">
-              x {product.usageCount}
-            </div>
-            <h6 className="name">{product.name} </h6>
-            <div className="badge badge-category">
-              {product.category + " "}
-              {match && <img src={match.img} alt={product.category} className="category-img" />}
-            </div>
-
-            <div>
-                <div>{/* ref={this.productShowDetails} */}
-                  <FontAwesomeIcon
-                    data-switch="false"
-                    className="fa-lg nutrients-switch"
-                    icon="angle-down"
-                  />
-                </div>
-                <div className="nutrients">
-                  <div className="float-right nutrients_info">
-                    w {product.serving_weight_grams || "--"} g/ml
-                  </div>
-                  <div className="nutrients_kcal">
-                    cal: {product.calories || "0"}
-                  </div>
-                  <div className="nutrients_w">
-                    c: {product.carbohydrates || "0"}
-                  </div>
-                  <div className="nutrients_b">
-                    p: {product.proteins || "0"}
-                  </div>
-                  <div className="nutrients_t">f: {product.fats || "0"}</div>
-                </div>
-              </div>
-          </div>
-      );
+      )
     }
-  };
+  }
 
   render() { 
+    const { product, match, cart } = this.props;
     return ( 
-      <div>
-        {this.renderContent()}
+      <div className="product">
+        <div className="badge badge-info">{product.count}</div>
+        {product.photo && <img className="product-img" alt={product.name} src={product.photo} />}
+        <span className="name">{" " + product.name}</span>
+        <div
+          className="btn btn-sm category-box"
+          data-category={product.category}
+        >
+          <div className="badge badge-category">
+            {product.category + " "}
+            {match && <img src={match.img} alt={product.category} className="category-img" />}
+          </div>
+        </div>
+
+        {this.renderProductInfo(product)}
+
+        <button
+          onClick={() => this.props.deleteProduct(cart.id, product.id)}
+          className="btn btn-sm btn-green delete-btn float-right"
+        >
+          <FontAwesomeIcon className="fa-md" icon="times" />
+        </button>
+        <div className="btn-group float-right">
+          <button
+            onClick={() =>
+              this.props.updateProductCount(cart.id, product.id, "increment")
+            }
+            className="btn btn-sm btn-lightgreen"
+          >
+            <FontAwesomeIcon className="fa-md" icon="angle-up" />
+          </button>
+          <button
+            onClick={() =>
+              this.props.updateProductCount(cart.id, product.id, "decrement")
+            }
+            className="btn btn-sm btn-lightgreen"
+          >
+            <FontAwesomeIcon className="fa-md" icon="angle-down" />
+          </button>
+        </div>
       </div>
-     );
+    );
   }
 }
 

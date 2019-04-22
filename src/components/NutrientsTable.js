@@ -31,19 +31,19 @@ class NutrientsTable extends Component {
                         <td className="font-weight-bold">
                         Carbohydrates
                         </td>
-                        <td>{carbohydrates}</td>
+                        <td>{carbohydrates&&carbohydrates.toFixed(1)}</td>
                     </tr>
                     <tr>
                         <td className="font-weight-bold">
                         Proteins
                         </td>
-                        <td>{proteins}</td>
+                        <td>{proteins&&proteins.toFixed(1)}</td>
                     </tr>
                     <tr>
                         <td className="font-weight-bold">
                         Fats
                         </td>
-                        <td>{fats}</td>
+                        <td>{fats&&fats.toFixed(1)}</td>
                     </tr>
                     </tbody>
                 </table>
