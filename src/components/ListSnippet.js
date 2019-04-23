@@ -1,35 +1,35 @@
-import "./CartSnippet.scss";
+import "./ListSnippet.scss";
 import React from "react";
 import { Link } from "react-router-dom";
 import _ from "lodash";
-import { deleteCart } from "../../actions";
+import { deleteCart } from "../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 
-const CartSnippet = props => {
-  const { cart, deleteCart } = props;
+const ListSnippet = props => {
+  const { list, endpoint, deleteCart } = props;
   return (
     <div className="single-list-preview">
-      <h4>{cart.title}</h4>
+      <h4>{list.title}</h4>
       <hr />
       <div className="badge badge-warning">
-        Products: {_.size(cart.productsList)}
+        Products: {_.size(list.productsList)}
       </div>
       <div title="Created">
-        <FontAwesomeIcon className="fa-sm" icon="calendar" /> {cart.createDate}
+        <FontAwesomeIcon className="fa-sm" icon="calendar" /> {list.createDate}
       </div>
       <button
-        onClick={() => deleteCart(cart.id)}
+        onClick={() => deleteCart(list.id)}
         className="btn btn-sm btn-outline-lightgreen btn-delete"
         title="Delete"
       >
         <FontAwesomeIcon className="fa-md" icon="times" />
       </button>
       <Link
-        to={`/carts/${cart.id}`}
+        to={`/${endpoint}/${list.id}`}
         className="btn btn-green btn-block btn-open-list"
       >
-        Open cart
+        Open
       </Link>
     </div>
   );
@@ -38,4 +38,4 @@ const CartSnippet = props => {
 export default connect(
   null,
   { deleteCart }
-)(CartSnippet);
+)(ListSnippet);

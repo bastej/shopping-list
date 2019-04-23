@@ -1,4 +1,4 @@
-import { ADD_PRODUCT } from "../actions/types";
+import { ADD_CART_PRODUCT, ADD_MEAL_PRODUCT } from "../actions/types";
 import _ from "lodash";
 
 const INITIAL_PORDUCTS = {
@@ -152,7 +152,7 @@ const INITIAL_PORDUCTS = {
 
 export default function(state = INITIAL_PORDUCTS, action) {
   switch (action.type) {
-    case ADD_PRODUCT: {
+    case ADD_CART_PRODUCT || ADD_MEAL_PRODUCT: {
       const index = _.size(state);
       const { product } = action.payload;
       //check if product exist
@@ -167,7 +167,7 @@ export default function(state = INITIAL_PORDUCTS, action) {
           }
         };
       } else {
-        //add prod to list of all products 
+        //add prod to list of all products
         return {
           ...state,
           [index]: {

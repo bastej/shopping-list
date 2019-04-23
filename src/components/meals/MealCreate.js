@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ListCreate from "../ListCreate";
 
-import { createNewCart } from "../../actions";
+import { createNewMeal } from "../../actions";
 import { setNavHeader } from "../../actions";
 
-class CartCreate extends Component {
+class MealCreate extends Component {
   componentDidMount() {
-    this.props.setNavHeader("Create shopping cart");
+    this.props.setNavHeader("Create meal");
   }
 
   onSubmit = title => {
-    this.props.createNewCart(title, this.props.history);
+    this.props.createNewMeal(title, this.props.history);
   };
 
   render() {
@@ -21,5 +21,5 @@ class CartCreate extends Component {
 
 export default connect(
   null,
-  { createNewCart, setNavHeader }
-)(CartCreate);
+  { createNewMeal, setNavHeader }
+)(MealCreate);

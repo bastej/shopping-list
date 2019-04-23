@@ -1,18 +1,18 @@
 import {
-  CREATE_NEW_CART,
-  DELETE_CART,
-  ADD_CART_PRODUCT,
-  UPDATE_CART_PRODUCT_COUNT,
-  DELETE_CART_PRODUCT
+  CREATE_NEW_MEAL,
+  DELETE_MEAL,
+  ADD_MEAL_PRODUCT,
+  UPDATE_MEAL_PRODUCT_COUNT,
+  DELETE_MEAL_PRODUCT
 } from "../actions/types";
 
 import _ from "lodash";
 
-const INITIAL_CARTS = {
+const INITIAL_MEALS = {
   0: {
     id: 0,
-    type: "cart",
-    title: "Christmas shopping",
+    type: "meal",
+    title: "Breakfast - some meal",
     createDate: "04.09.2018",
     productsList: {
       0: {
@@ -101,8 +101,8 @@ const INITIAL_CARTS = {
   },
   1: {
     id: 1,
-    type: "cart",
-    title: "For kitchen",
+    type: "meal",
+    title: "Dinner",
     createDate: "21.11.2018",
     productsList: {
       0: {
@@ -172,7 +172,7 @@ const INITIAL_CARTS = {
   },
   2: {
     id: 2,
-    type: "cart",
+    type: "meal",
     title: "Protein shake",
     createDate: "1.11.2008",
     productsList: {
@@ -280,21 +280,21 @@ const INITIAL_CARTS = {
   }
 };
 
-export default function(state = INITIAL_CARTS, action) {
+export default function(state = INITIAL_MEALS, action) {
   switch (action.type) {
-    case CREATE_NEW_CART: {
+    case CREATE_NEW_MEAL: {
       const index = _.size(state) || 0;
       return { ...state, [index]: { id: index, ...action.payload } };
     }
-    case ADD_CART_PRODUCT: {
-      const { product, listID } = action.payload;
-      const productID = _.size(state[listID].productsList) || 0;
+    case ADD_MEAL_PRODUCT: {
+      const { product, mealID } = action.payload;
+      const productID = _.size(state[mealID].productsList) || 0;
       return {
         ...state,
-        [listID]: {
-          ...state[listID],
+        [mealID]: {
+          ...state[mealID],
           productsList: {
-            ...state[listID].productsList,
+            ...state[mealID].productsList,
             [productID]: {
               id: productID,
               ...product
@@ -303,14 +303,14 @@ export default function(state = INITIAL_CARTS, action) {
         }
       };
     }
-    case UPDATE_CART_PRODUCT_COUNT: {
-      const { listID, productID, actionType } = action.payload;
-      const { count } = state[listID].productsList[productID];
-      const { productsList } = state[listID];
+    case UPDATE_MEAL_PRODUCT_COUNT: {
+      const { mealID, productID, actionType } = action.payload;
+      const { count } = state[mealID].productsList[productID];
+      const { productsList } = state[mealID];
       return {
         ...state,
-        [listID]: {
-          ...state[listID],
+        [mealID]: {
+          ...state[mealID],
           productsList: {
             ...productsList,
             [productID]: {
@@ -326,19 +326,19 @@ export default function(state = INITIAL_CARTS, action) {
         }
       };
     }
-    case DELETE_CART_PRODUCT: {
-      const { listID, productID } = action.payload;
+    case DELETE_MEAL_PRODUCT: {
+      const { mealID, productID } = action.payload;
       return {
         ...state,
-        [listID]: {
-          ...state[listID],
-          productsList: _.omit(state[listID].productsList, productID)
+        [mealID]: {
+          ...state[mealID],
+          productsList: _.omit(state[mealID].productsList, productID)
         }
       };
     }
-    case DELETE_CART: {
-      const { cartID } = action.payload;
-      return _.omit(state, cartID);
+    case DELETE_MEAL: {
+      const { mealID } = action.payload;
+      return _.omit(state, mealID);
     }
     default:
       return state;

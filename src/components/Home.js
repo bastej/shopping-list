@@ -5,25 +5,27 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProductSnippet from "./ProductSnippet";
-import CartSnippet from "./carts/CartSnippet";
-import { setNavHeader } from '../actions';
+import ListSnippet from "./ListSnippet";
+import { setNavHeader } from "../actions";
 
 class Home extends Component {
-
   componentDidMount() {
-    this.props.setNavHeader('Shopping list App'); 
+    this.props.setNavHeader("Shopping list App");
   }
 
-  renderRecentCarts = (carts) => {
-    const recentCarts = _.filter(carts, (el, index) => index > _.size(carts) - 4);
-    return _.map(recentCarts, cart=> {
+  renderRecentLists = lists => {
+    const recentLists = _.filter(
+      lists,
+      (el, index) => index > _.size(lists) - 4
+    );
+    return _.map(recentLists, list => {
       return (
-        <div key={cart.id} className="col-12 col-lg-4">
-          <CartSnippet cart={cart} />
+        <div key={list.id} className="col-12 col-lg-4">
+          <ListSnippet list={list} endpoint={`${list.type}s`} />
         </div>
       );
-    })
-  }
+    });
+  };
 
   renderProducts = (products, categories) => {
     return _.map(products, product => {
@@ -34,18 +36,14 @@ class Home extends Component {
           data-category={product.category}
           className="col-12 col-md-6 col-lg-3"
         >
-          <ProductSnippet
-            key={product.id}
-            product={product}
-            match={match}
-          />
+          <ProductSnippet key={product.id} product={product} match={match} />
         </div>
       );
-    })
-  }
+    });
+  };
 
   render() {
-    const { carts, products, categories } = this.props;
+    const { carts, meals, products, categories } = this.props;
     return (
       <div className="home">
         <div className="container">
@@ -60,7 +58,13 @@ class Home extends Component {
             <div className="col-12">
               <h3>Recent carts:</h3>
             </div>
-            {this.renderRecentCarts(carts)}
+            {this.renderRecentLists(carts)}
+          </div>
+          <div className="row">
+            <div className="col-12">
+              <h3>Recent meals:</h3>
+            </div>
+            {this.renderRecentLists(meals)}
           </div>
           <div className="row">
             <div className="col-12">
@@ -76,9 +80,10 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps({ carts, products, categories }) {
+function mapStateToProps({ carts, products, categories, meals }) {
   return {
     carts,
+    meals,
     products,
     categories
   };

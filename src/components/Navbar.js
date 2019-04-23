@@ -3,22 +3,20 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-const renderHeader = (header) => {
-  if(!header.tag) {
-    return <span className="page-header navbar-brand">
-      {header.text}
-    </span>
+const renderHeader = header => {
+  if (!header.tag) {
+    return <span className="page-header navbar-brand">{header.text}</span>;
   } else {
-    return <div className="navbar-brand abs">
-      <span className="page-header">{header.text + " "}</span>
-      <span className="badge badge-pill badge-warning">
-        {header.tag}
-      </span>            
-    </div>
+    return (
+      <div className="navbar-brand abs">
+        <span className="page-header">{header.text + " "}</span>
+        <span className="badge badge-pill badge-warning">{header.tag}</span>
+      </div>
+    );
   }
-}
+};
 
 const Navbar = props => {
   const { header } = props;
@@ -45,9 +43,9 @@ const Navbar = props => {
 };
 
 const mapStateToProps = ({ currentNavHeader }) => {
-  return { 
+  return {
     header: currentNavHeader
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(Navbar);

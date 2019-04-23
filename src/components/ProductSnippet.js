@@ -1,9 +1,8 @@
-import './ProductSnippet.scss';
-import React, { Component } from 'react';
+import "./ProductSnippet.scss";
+import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class ProductSnippet extends Component {
-
   constructor(props) {
     super(props);
 
@@ -11,25 +10,24 @@ class ProductSnippet extends Component {
     this.detailBtn = React.createRef();
   }
 
-  showDetails = (e) => {
+  showDetails = e => {
     const btn = this.detailBtn.current;
     const detailsBox = this.detailsBoxRef.current;
     const arrowIcon = btn.children[0];
     if (btn.getAttribute("data-switch") === "false") {
-      btn.setAttribute('data-switch', true);
-      arrowIcon.style.transform = 'rotateX(180deg)';
-      detailsBox.style.height = '80px';
+      btn.setAttribute("data-switch", true);
+      arrowIcon.style.transform = "rotateX(180deg)";
+      detailsBox.style.height = "80px";
     } else {
-      btn.setAttribute('data-switch', false);
-      arrowIcon.style.transform = 'rotateX(0deg)';
-      detailsBox.style.height = '0';
+      btn.setAttribute("data-switch", false);
+      arrowIcon.style.transform = "rotateX(0deg)";
+      detailsBox.style.height = "0";
     }
+  };
 
-  }
-
-  render() { 
+  render() {
     const { product, match } = this.props;
-    return ( 
+    return (
       <div className="product">
         <div className="badge badge-info badge-times">
           x {product.usageCount}
@@ -37,10 +35,16 @@ class ProductSnippet extends Component {
         <h6 className="name">{product.name} </h6>
         <div className="badge badge-category">
           {product.category + " "}
-          {match && <img src={match.img} alt={product.category} className="category-img" />}
+          {match && (
+            <img
+              src={match.img}
+              alt={product.category}
+              className="category-img"
+            />
+          )}
         </div>
         <div>
-          <div 
+          <div
             ref={this.detailBtn}
             onClick={this.showDetails}
             data-switch="false"
@@ -54,15 +58,9 @@ class ProductSnippet extends Component {
             <div className="float-right nutrients_info">
               w {product.serving_weight_grams || "--"} g/ml
             </div>
-            <div className="nutrients_kcal">
-              cal: {product.calories || "0"}
-            </div>
-            <div className="nutrients_w">
-              c: {product.carbohydrates || "0"}
-            </div>
-            <div className="nutrients_b">
-              p: {product.proteins || "0"}
-            </div>
+            <div className="nutrients_kcal">cal: {product.calories || "0"}</div>
+            <div className="nutrients_w">c: {product.carbohydrates || "0"}</div>
+            <div className="nutrients_b">p: {product.proteins || "0"}</div>
             <div className="nutrients_t">f: {product.fats || "0"}</div>
           </div>
         </div>
@@ -70,5 +68,5 @@ class ProductSnippet extends Component {
     );
   }
 }
- 
+
 export default ProductSnippet;

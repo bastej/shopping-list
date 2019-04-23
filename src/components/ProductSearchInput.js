@@ -3,10 +3,9 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { Field, change } from "redux-form";
 import { connect } from "react-redux";
-import { getProductsHints, clearProductsHints } from '../actions';
+import { getProductsHints, clearProductsHints } from "../actions";
 
 class productSearch extends Component {
-
   onInputChange = query => {
     if (query.length) {
       this.props.getProductsHints(query);
@@ -20,7 +19,7 @@ class productSearch extends Component {
     this.props.clearProductsHints();
   };
 
-  renderHints = ()  => {
+  renderHints = () => {
     return _.map(this.props.foods, (elem, index) => {
       return (
         <li
@@ -32,10 +31,10 @@ class productSearch extends Component {
           {elem}
         </li>
       );
-    })
-  }
+    });
+  };
 
-  renderProdSearch = ({name, input, meta}) => {
+  renderProdSearch = ({ name, input, meta }) => {
     const className = `form-control ${
       meta.touched && meta.error ? "is-invalid" : ""
     }`;
@@ -50,9 +49,7 @@ class productSearch extends Component {
           placeholder="Text product name"
           {...input}
         />
-        <div className="text-danger">
-          {meta.touched ? meta.error : ""}
-        </div>
+        <div className="text-danger">{meta.touched ? meta.error : ""}</div>
         <ul id="listbox" role="listbox" className="list-group">
           {meta.valid && this.renderHints()}
         </ul>
@@ -77,11 +74,11 @@ class productSearch extends Component {
   }
 }
 
-const mapStateToProps = ({productHints}) => {
+const mapStateToProps = ({ productHints }) => {
   return {
     foods: productHints
-  }
-}
+  };
+};
 
 export default connect(
   mapStateToProps,

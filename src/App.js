@@ -7,7 +7,10 @@ import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import CartCreate from "./components/carts/CartCreate";
 import Cart from "./components/carts/Cart";
-import CartList from "./components/carts/CartList";
+import CartCollection from "./components/carts/CartCollection";
+import MealCreate from "./components/meals/MealCreate";
+import Meal from "./components/meals/Meal";
+import MealCollection from "./components/meals/MealCollection";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -34,15 +37,18 @@ class App extends Component {
   render() {
     return (
       <HashRouter>
-          <main>
-            <Navbar />
-            <Switch>
-              <Route path="/carts/create" component={CartCreate} />
-              <Route path="/carts/:id" component={Cart} />
-              <Route path="/carts" component={CartList} />
-              <Route path="/" component={Home} />
-            </Switch>
-          </main>
+        <main>
+          <Navbar />
+          <Switch>
+            <Route path="/carts/create" component={CartCreate} />
+            <Route path="/meals/create" component={MealCreate} />
+            <Route path="/carts/:id" component={Cart} />
+            <Route path="/meals/:id" component={Meal} />
+            <Route path="/carts" component={CartCollection} />
+            <Route path="/meals" component={MealCollection} />
+            <Route path="/" component={Home} />
+          </Switch>
+        </main>
       </HashRouter>
     );
   }

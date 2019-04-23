@@ -1,4 +1,4 @@
-import "./AddProductForm.scss"
+import "./AddProductForm.scss";
 import React from "react";
 import { Field, reduxForm, reset } from "redux-form";
 import { connect } from "react-redux";
@@ -6,9 +6,10 @@ import { addProduct, addCategory } from "../actions";
 import ProductSearch from "./ProductSearchInput";
 
 const AddProductForm = props => {
-
   const renderField = ({ input, placeholder, meta }) => {
-    const className = `form-control ${meta.touched && meta.error ? "is-invalid" : ""}`;
+    const className = `form-control ${
+      meta.touched && meta.error ? "is-invalid" : ""
+    }`;
     return (
       <div className="form-group">
         <input
@@ -17,27 +18,30 @@ const AddProductForm = props => {
           placeholder={placeholder}
           {...input}
         />
-        <div className="text-danger">
-          {meta.touched ? meta.error : ""}
-        </div>
+        <div className="text-danger">{meta.touched ? meta.error : ""}</div>
       </div>
     );
   };
 
   const onSubmit = values => {
-    props.addProduct(values, cartID);
+    props.addProduct(values, listID, listType);
     props.addCategory(values.category);
     props.reset("addProduct");
   };
 
-  const { handleSubmit, cartID } = props;
+  const { handleSubmit, listID, listType } = props;
   return (
     <div className="add-product-form">
       <form
-        onSubmit={handleSubmit(onSubmit)}// sprawdzic
+        onSubmit={handleSubmit(onSubmit)} // sprawdzic
         className="form-group"
       >
-        <Field component={renderField} name="count" placeholder="Set count" type="number" />
+        <Field
+          component={renderField}
+          name="count"
+          placeholder="Set count"
+          type="number"
+        />
         <Field
           component={renderField}
           name="category"
