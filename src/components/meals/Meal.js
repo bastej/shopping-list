@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
-import ProductListCreator from "../ProductListCreator";
+import ListCreator from "../ListCreator";
 import NutrientsTable from "../NutrientsTable";
-import Product from "../Product";
-import ProductDetails from "../ProductDetails";
+import Product from "../products/Product";
+import ProductDetails from "../products/ProductDetails";
 import { calculateNutrients } from "../../actions";
 
 class Meal extends Component {
@@ -35,9 +35,9 @@ class Meal extends Component {
   render() {
     const { meal } = this.props;
     return (
-      <ProductListCreator list={meal} renderProducts={this.renderMealProducts}>
+      <ListCreator list={meal} renderProducts={this.renderMealProducts}>
         <NutrientsTable productsList={meal.productsList} />
-      </ProductListCreator>
+      </ListCreator>
     );
   }
 }

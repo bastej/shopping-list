@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
-import ProductListCreator from "../ProductListCreator";
-import Product from "../Product";
+import ListCreator from "../ListCreator";
+import Product from "../products/Product";
 
 class Cart extends Component {
   renderCartProducts = (list, categories) => {
@@ -23,12 +23,7 @@ class Cart extends Component {
 
   render() {
     const { cart } = this.props;
-    return (
-      <ProductListCreator
-        list={cart}
-        renderProducts={this.renderCartProducts}
-      />
-    );
+    return <ListCreator list={cart} renderProducts={this.renderCartProducts} />;
   }
 }
 

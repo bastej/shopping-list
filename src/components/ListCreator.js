@@ -1,4 +1,4 @@
-import "./ProductListCreator.scss";
+import "./ListCreator.scss";
 import React, { Component } from "react";
 import _ from "lodash";
 import { Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import AddProductForm from "./AddProductForm";
 import { setNavHeader } from "../actions";
 
-class ProductListCreator extends Component {
+class ListCreator extends Component {
   componentDidMount() {
     this.props.setNavHeader(
       this.props.list.title,
@@ -72,4 +72,4 @@ const mapStateToProps = ({ products, categories }) => {
 export default connect(
   mapStateToProps,
   { setNavHeader }
-)(ProductListCreator);
+)(ListCreator);

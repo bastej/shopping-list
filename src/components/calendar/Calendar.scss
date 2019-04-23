@@ -1,0 +1,32 @@
+@import '../styles/colors.sass';
+
+.calendar {
+    th {
+        background-color: $darkGreen;
+    }
+    th,td {
+        height: 50px;
+        width: 50px;
+        text-align: center;
+    }
+    .today {
+        background-color: $lightBlue;
+    }
+    @media (min-width: 768px){
+        .seven-cols .col-md-1,
+        .seven-cols .col-sm-1,
+        .seven-cols .col-lg-1  {
+          width: 100%;
+          *width: 100%;
+        }
+      }
+      
+      @media (min-width: 992px) {
+        .seven-cols .col-md-1,
+        .seven-cols .col-sm-1,
+        .seven-cols .col-lg-1 {
+          width: 14.285714285714285714285714285714%;
+          *width: 14.285714285714285714285714285714%;
+        }
+      }
+}

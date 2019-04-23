@@ -11,6 +11,8 @@ import CartCollection from "./components/carts/CartCollection";
 import MealCreate from "./components/meals/MealCreate";
 import Meal from "./components/meals/Meal";
 import MealCollection from "./components/meals/MealCollection";
+import Calendar from "./components/calendar/Calendar";
+import Day from "./components/calendar/Day";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -40,6 +42,8 @@ class App extends Component {
         <main>
           <Navbar />
           <Switch>
+            <Route path="/calendar/:day" component={Day} />
+            <Route path="/calendar" component={Calendar} />
             <Route path="/carts/create" component={CartCreate} />
             <Route path="/meals/create" component={MealCreate} />
             <Route path="/carts/:id" component={Cart} />

@@ -4,7 +4,7 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ProductSnippet from "./ProductSnippet";
+import ProductSnippet from "./products/ProductSnippet";
 import ListSnippet from "./ListSnippet";
 import { setNavHeader } from "../actions";
 

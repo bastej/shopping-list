@@ -1,7 +1,7 @@
 import "./Product.scss";
 import React, { Component } from "react";
 import _ from "lodash";
-import { deleteProduct, updateProductCount } from "../actions";
+import { deleteProduct, updateProductCount } from "../../actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 
