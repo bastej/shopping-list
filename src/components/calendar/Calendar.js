@@ -1,10 +1,13 @@
 import "./Calendar.scss";
 import React, { Component } from "react";
+import _ from "lodash";
 import moment from "moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Calendar extends Component {
   state = {
-    dateObject: moment()
+    dateObject: moment(),
+    selectedMonth: ""
   };
 
   daysInMonth = () => {
@@ -12,6 +15,9 @@ class Calendar extends Component {
   };
   year = () => {
     return this.state.dateObject.format("Y");
+  };
+  month = () => {
+    return this.state.dateObject.format("MMMM");
   };
   currentDay = () => {
     return parseInt(this.state.dateObject.format("D"));
@@ -29,66 +35,77 @@ class Calendar extends Component {
 
   renderDaysNamesRow() {
     const daysShortNames = moment.weekdaysShort();
-    return daysShortNames.map(day => {
+    const cols = daysShortNames.map(day => {
       return (
         <th key={day} className="week-day">
           {day}
         </th>
       );
     });
+    return <tr>{cols}</tr>;
   }
 
   renderPrevMonthDays() {
-    const blanks = [];
+    const blanks = {};
     for (let i = 0; i < this.firstDayOfMonth(); i++) {
-      blanks.push(<td className="day empty">{""}</td>);
+      return { ...blanks, [i]: { key: i, isEmpty: true } };
     }
-    return blanks;
   }
 
   renderCurrentMonthDays() {
-    let daysInMonth = [];
-    for (let day = 1; day <= this.daysInMonth(); day++) {
+    let daysInMonth = {};
+    for (let dayNumber = 1; dayNumber <= this.daysInMonth(); dayNumber++) {
       //select today
-      const currentDay = day === this.currentDay() ? " today" : "";
+      const currentDay = dayNumber === this.currentDay() ? true : false;
 
-      daysInMonth.push(
-        <td className={`day${currentDay}`} key={day}>
-          {day}
-        </td>
-      );
+      daysInMonth = {
+        ...daysInMonth,
+        [dayNumber]: { key: dayNumber, isToday: currentDay }
+      };
     }
     return daysInMonth;
   }
 
   renderRowsWithDays(monthDays) {
-    const weekRows = [];
+    let weekRows = [];
     let week = [];
 
-    monthDays.forEach((day, i) => {
-      if (i === 0) {
-        week.push(day); //in case i === 0 also should push day
-      } else if (i % 7 !== 0) {
-        week.push(day); // if index not equal 7 that means not go to next week
+    for (var i in monthDays) {
+      // const key = toString(i);
+      const dayHere = (
+        <td
+          key={monthDays[i].key}
+          className={`${monthDays[i].isEmpty && "empty"} ${monthDays[i]
+            .isToday && "today"}`}
+        >
+          {monthDays[i].key}
+        </td>
+      );
+      if (monthDays[i].key % 7 !== 0 || monthDays[i].key === 0) {
+        console.log("day: ", typeof monthDays[i].key);
+        week.push(dayHere); // if index not equal 7 that means not go to next week
       } else {
-        weekRows.push(week); // when reach next week we contain all td in last week to weekRows
-        week = []; // empty container
-        week.push(day); // in current loop we still push current row to new container
-      }
-      if (i === monthDays.length - 1) {
-        // when end loop we add remain date
         weekRows.push(week);
         week = []; // empty container
+        week.push(dayHere);
       }
-    });
-
+      if (monthDays[i].key === _.size(monthDays) - 1) {
+        console.log(`tutaj jest dzien ${i}`);
+        // when end loop we add remain date
+        weekRows.push(week);
+        // week = []; // empty container
+      }
+    }
     return weekRows;
   }
 
   renderMonthDays = days => {
     const prevMonthDays = this.renderPrevMonthDays();
+    console.log("prevmonth days: ", prevMonthDays);
     const currentMonthDays = this.renderCurrentMonthDays();
-    const monthDays = [...prevMonthDays, ...currentMonthDays];
+    console.log("nextmonth days: ", currentMonthDays);
+    const monthDays = { ...prevMonthDays, ...currentMonthDays };
+    console.log("days: ", monthDays);
 
     const weekRows = this.renderRowsWithDays(monthDays);
 
@@ -100,17 +117,42 @@ class Calendar extends Component {
     return daysToShow;
   };
 
+  nextMonth = month => {
+    const dateObject = this.state.dateObject.add(1, "month");
+    this.setState({ dateObject });
+  };
+
+  prevMonth = month => {
+    const dateObject = this.state.dateObject.subtract(1, "month");
+    this.setState({ dateObject });
+  };
+
   render() {
     return (
       <div className="calendar">
         <div className="container">
           <div className="row">
             <div className="col-lg-6 col-md-12 offset-lg-3">
-              <div className="navi">navi</div>
+              <div className="navi mx-auto text-center">
+                <button
+                  onClick={() => this.prevMonth(this.month())}
+                  className="btn"
+                >
+                  <FontAwesomeIcon className="fa-lg" icon="angle-left" />
+                </button>
+                <h4 className="month-name p-2 m-auto">
+                  {this.month()} {this.year()}
+                </h4>
+                <button
+                  onClick={() => this.nextMonth(this.month())}
+                  className="btn"
+                >
+                  <FontAwesomeIcon className="fa-lg" icon="angle-right" />
+                </button>
+              </div>
+
               <table className="days mx-auto">
-                <thead>
-                  <tr>{this.renderDaysNamesRow()}</tr>
-                </thead>
+                <thead>{this.renderDaysNamesRow()}</thead>
                 <tbody>{this.renderMonthDays()}</tbody>
               </table>
             </div>

@@ -121,8 +121,23 @@ export const getProductsHints = query => async dispatch => {
     }
   });
   const payload = _.map(request.data.common, elem => elem.food_name);
-
   dispatch({ type: GET_PRODUCT_HINTS, payload });
+  // try {
+  //   const request = await nutritionixAPI.get(`/search/instant/`, {
+  //     params: {
+  //       common_general: true,
+  //       branded: false,
+  //       query: query
+  //     }
+  //   });
+  //   const payload = _.map(request.data.common, elem => elem.food_name);
+  //   if (!payload.length) {
+  //     throw new Error("Item not found in api");
+  //   }
+  //   dispatch({ type: GET_PRODUCT_HINTS, payload });
+  // } catch (err) {
+  //   console.log(err);
+  // }
 };
 
 export function clearProductsHints() {

@@ -3,19 +3,22 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import ListCreator from "../ListCreator";
 import Product from "../products/Product";
+import ErrorBoundary from "../ErrorBoundary";
 
 class Cart extends Component {
   renderCartProducts = (list, categories) => {
     return _.map(list.productsList, product => {
-      let match = _.find(categories, { name: product.category });
+      const matchCategory = _.find(categories, { name: product.category });
       return (
         <li key={product.id} className="list-group-item">
-          <Product
-            product={product}
-            listID={list.id}
-            listType={list.type}
-            match={match}
-          />
+          <ErrorBoundary>
+            <Product
+              product={product}
+              listID={list.id}
+              listType={list.type}
+              categoryImg={matchCategory && matchCategory.img}
+            />
+          </ErrorBoundary>
         </li>
       );
     });

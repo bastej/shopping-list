@@ -1,23 +1,32 @@
 import "./Product.scss";
 import React, { Component } from "react";
-import _ from "lodash";
-import { deleteProduct, updateProductCount } from "../../actions";
+// import _ from "lodash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
+import { deleteProduct, updateProductCount } from "../../actions";
+import PropTypes from "prop-types";
 
 class Product extends Component {
-  constructor(props) {
-    super(props);
-    // this.productShowDetails = React.createRef();
-  }
+  // constructor(props) {
+  //   super(props);
+  //   // this.productShowDetails = React.createRef();
+  // }
 
   componentDidMount() {
     // console.log(typeof this.productShowDetails.current);
     // this.productShowDetails.current.onClick = () => alert(2);
+    if (this.props.product.id === 0) {
+      alert("ERROR for test, ErrorBoundary");
+      throw new Error("TEST error");
+    }
+    console.log(typeof this.props.listID);
+    console.log(typeof this.props.categoryImg);
+    console.log(this.props.product);
   }
 
   render() {
-    const { product, match, listID, listType } = this.props;
+    const { product, categoryImg, listID, listType } = this.props;
+
     return (
       <div className="product">
         <div className="badge badge-info">{product.count}</div>
@@ -31,9 +40,9 @@ class Product extends Component {
         >
           <div className="badge badge-category">
             {product.category + " "}
-            {match && (
+            {categoryImg && (
               <img
-                src={match.img}
+                src={categoryImg}
                 alt={product.category}
                 className="category-img"
               />
@@ -86,3 +95,22 @@ export default connect(
   null,
   { deleteProduct, updateProductCount }
 )(Product);
+
+Product.propTypes = {
+  listID: PropTypes.number.isRequired,
+  listType: PropTypes.string.isRequired,
+  categoryImg: PropTypes.string,
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+    serving_weight_grams: PropTypes.number,
+    calories: PropTypes.number,
+    carbohydrates: PropTypes.number,
+    proteins: PropTypes.number,
+    fats: PropTypes.number,
+    tags: PropTypes.arrayOf(PropTypes.string),
+    photo: PropTypes.string
+  })
+};
