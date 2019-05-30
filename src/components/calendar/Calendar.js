@@ -57,8 +57,15 @@ class Calendar extends Component {
 
   renderPrevMonthDays() {
     let blanks = [];
-    for (let i = 0; i < this.getFirstDayOfMonth(); i++) {
-      // alert(!!(i < this.getFirstDayOfMonth()));
+    const dateObject = { ...this.state.dateObject };
+    const prevMonthDays = moment(this.state.dateObject.toDate())
+      .subtract(1, "month")
+      .daysInMonth();
+    const firstDayOfCurrentMonth = this.getFirstDayOfMonth();
+    const firstDayToShowFromPrevMonth =
+      prevMonthDays - firstDayOfCurrentMonth + 1;
+
+    for (let i = firstDayToShowFromPrevMonth; i <= prevMonthDays; i++) {
       blanks.push({ key: i, isEmpty: true });
     }
     return blanks;
@@ -82,18 +89,18 @@ class Calendar extends Component {
   renderRowsWithDays(monthDays) {
     let weekRows = [];
     let week = [];
-    // console.log("test: ", monthDays);
     for (let i = 0; i < monthDays.length; i++) {
-      // const key = toString(i);
-
       const dayHere = (
-        <td key={i} className={`${monthDays[i].isToday ? "today" : ""}`}>
-          {!monthDays[i].isEmpty && monthDays[i].key}
+        <td
+          key={i}
+          className={`${monthDays[i].isEmpty ? "empty" : ""} ${
+            monthDays[i].isToday ? "today" : ""
+          }`}
+        >
+          {monthDays[i].key}
         </td>
       );
-      // console.log("pojedynczy dzien: ", monthDays[i]);
       if (i % 7 !== 0 || i === 0) {
-        // console.log("day: ", typeof monthDays[i].key);
         week.push(dayHere); // if index not equal 7 that means not go to next week
       } else {
         weekRows.push(week);
@@ -101,7 +108,6 @@ class Calendar extends Component {
         week.push(dayHere);
       }
       if (i === monthDays.length - 1) {
-        // console.log(`tutaj jest dzien ${i}`);
         // when end loop we add remain date
         weekRows.push(week);
         // week = []; // empty container
@@ -110,16 +116,11 @@ class Calendar extends Component {
     return weekRows;
   }
 
-  renderMonthDays = days => {
+  renderMonthDays = () => {
     const prevMonthDays = this.renderPrevMonthDays();
-    // console.log("prevmonth days: ", prevMonthDays);
     const currentMonthDays = this.renderCurrentMonthDays();
-    // console.log("nextmonth days: ", currentMonthDays);
     const monthDays = [...prevMonthDays, ...currentMonthDays];
-    // console.log("days: ", monthDays);
-    // setTimeout(() => console.log(monthDays), 2000);
     const weekRows = this.renderRowsWithDays(monthDays);
-    setTimeout(() => console.log(weekRows), 2000);
 
     //render rows with weeks
     const daysToShow = weekRows.map((week, i) => {
@@ -140,8 +141,6 @@ class Calendar extends Component {
   };
 
   render() {
-    console.log("now:", moment().format("MMMM"));
-    console.log("miesiac:", this.getMonth());
     return (
       <div className="calendar">
         <div className="container">
