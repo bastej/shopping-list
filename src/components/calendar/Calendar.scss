@@ -8,6 +8,8 @@
         height: 50px;
         width: 50px;
         text-align: center;
+        padding-left: 0;
+        padding-right: 0;
     }
     .navi {
         width: 350px;
@@ -20,8 +22,38 @@
             display: inline-block;
         }
     }
-    .today {
-        background-color: $lightBlue;
+    
+    .day {
+        background-color: transparent;
+        position: relative;
+        width: 100%;
+        &.selected {
+            background-color: $lightBlue;
+            border-radius: 6px;
+            border: 3px solid $darkBlue;
+            &.first {
+                border-radius: 6px 0 0 6px;
+                border-width: 0 0 0 3px;
+            }
+            &.last {
+                border-radius: 0 6px 6px 0;
+                border-width: 0 3px 0 0;
+            }
+        }
+        &.today::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            right: 10px;
+            bottom: 5px;
+            border: 2px solid $lightBlue;
+            border-radius: 15px;
+        }
+        &:hover {
+            background-color: $lightBlue;
+            border-radius: 6px;
+        }
     }
     .empty {
         color: gray;

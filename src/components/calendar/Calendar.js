@@ -16,7 +16,7 @@ class Calendar extends Component {
     currentDate: {
       year: moment().format("YYYY"),
       month: moment().format("MMMM"),
-      day: moment().format("D")
+      day: Number(moment().format("D"))
     }
   };
 
@@ -75,9 +75,11 @@ class Calendar extends Component {
     let daysInMonth = [];
     for (let dayNumber = 1; dayNumber <= this.getDaysInMonth(); dayNumber++) {
       //select today
+      console.log("z state: ", typeof this.state.currentDate.month);
+      console.log("z petli", typeof this.getMonth());
       const currentDay =
-        dayNumber === this.state.currentDay &&
-        this.state.currentMonth === this.getMonth()
+        dayNumber === this.state.currentDate.day &&
+        this.getMonth() === this.state.currentDate.month
           ? true
           : false;
 
@@ -91,13 +93,14 @@ class Calendar extends Component {
     let week = [];
     for (let i = 0; i < monthDays.length; i++) {
       const dayHere = (
-        <td
-          key={i}
-          className={`${monthDays[i].isEmpty ? "empty" : ""} ${
-            monthDays[i].isToday ? "today" : ""
-          }`}
-        >
-          {monthDays[i].key}
+        <td key={i}>
+          <button
+            className={`btn day ${monthDays[i].isEmpty ? "empty" : ""} ${
+              monthDays[i].isToday ? "today" : ""
+            }`}
+          >
+            {monthDays[i].key}
+          </button>
         </td>
       );
       if (i % 7 !== 0 || i === 0) {
