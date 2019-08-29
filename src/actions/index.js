@@ -18,6 +18,7 @@ import {
   DELETE_MEAL_PRODUCT
 } from "./types";
 
+// cart actions
 export const createNewCart = (value, history) => dispatch => {
   const cart = {
     title: value,
@@ -35,6 +36,67 @@ export function deleteCart(cartID) {
   };
 }
 
+export function calculateNutrients(productsList) {
+  let calories = 0,
+    carbohydrates = 0,
+    proteins = 0,
+    fats = 0;
+  _.map(productsList, product => {
+    product.calories && (calories += product.calories * product.count);
+    product.carbohydrates &&
+      (carbohydrates += product.carbohydrates * product.count);
+    product.proteins && (proteins += product.proteins * product.count);
+    product.fats && (fats += product.fats * product.count);
+  });
+
+  return {
+    type: CALCULATE_NUTRIENTS,
+    payload: { calories, carbohydrates, proteins, fats }
+  };
+}
+
+export const getProductsHints = query => async dispatch => {
+  const request = await nutritionixAPI.get(`/search/instant/`, {
+    params: {
+      common_general: true,
+      branded: false,
+      query: query
+    }
+  });
+  const payload = _.map(request.data.common, elem => elem.food_name);
+  dispatch({ type: GET_PRODUCT_HINTS, payload });
+  // try {
+  //   const request = await nutritionixAPI.get(`/search/instant/`, {
+  //     params: {
+  //       common_general: true,
+  //       branded: false,
+  //       query: query
+  //     }
+  //   });
+  //   const payload = _.map(request.data.common, elem => elem.food_name);
+  //   if (!payload.length) {
+  //     throw new Error("Item not found in api");
+  //   }
+  //   dispatch({ type: GET_PRODUCT_HINTS, payload });
+  // } catch (err) {
+  //   console.log(err);
+  // }
+};
+
+export function clearProductsHints() {
+  return {
+    type: CLEAR_PRODUCT_HINTS
+  };
+}
+
+export function addCategory(name) {
+  return {
+    type: ADD_CATEGORY,
+    payload: name
+  };
+}
+
+// product action
 export const addProduct = (values, listID, listType) => async dispatch => {
   const type = listType === "cart" ? ADD_CART_PRODUCT : ADD_MEAL_PRODUCT;
 
@@ -112,73 +174,7 @@ export function updateProductCount(listID, productID, actionType, listType) {
   };
 }
 
-export const getProductsHints = query => async dispatch => {
-  const request = await nutritionixAPI.get(`/search/instant/`, {
-    params: {
-      common_general: true,
-      branded: false,
-      query: query
-    }
-  });
-  const payload = _.map(request.data.common, elem => elem.food_name);
-  dispatch({ type: GET_PRODUCT_HINTS, payload });
-  // try {
-  //   const request = await nutritionixAPI.get(`/search/instant/`, {
-  //     params: {
-  //       common_general: true,
-  //       branded: false,
-  //       query: query
-  //     }
-  //   });
-  //   const payload = _.map(request.data.common, elem => elem.food_name);
-  //   if (!payload.length) {
-  //     throw new Error("Item not found in api");
-  //   }
-  //   dispatch({ type: GET_PRODUCT_HINTS, payload });
-  // } catch (err) {
-  //   console.log(err);
-  // }
-};
-
-export function clearProductsHints() {
-  return {
-    type: CLEAR_PRODUCT_HINTS
-  };
-}
-
-export function addCategory(name) {
-  return {
-    type: ADD_CATEGORY,
-    payload: name
-  };
-}
-
-export function setNavHeader(text, tag) {
-  return {
-    type: SET_NAV_HEADER,
-    payload: { text, tag }
-  };
-}
-
-export function calculateNutrients(productsList) {
-  let calories = 0,
-    carbohydrates = 0,
-    proteins = 0,
-    fats = 0;
-  _.map(productsList, product => {
-    product.calories && (calories += product.calories * product.count);
-    product.carbohydrates &&
-      (carbohydrates += product.carbohydrates * product.count);
-    product.proteins && (proteins += product.proteins * product.count);
-    product.fats && (fats += product.fats * product.count);
-  });
-
-  return {
-    type: CALCULATE_NUTRIENTS,
-    payload: { calories, carbohydrates, proteins, fats }
-  };
-}
-
+// meal actions
 export const createNewMeal = (value, history) => dispatch => {
   const cart = {
     title: value,
@@ -193,5 +189,13 @@ export function deleteMeal(mealID) {
   return {
     type: DELETE_MEAL,
     payload: { mealID }
+  };
+}
+
+// global actions
+export function setNavHeader(text, tag) {
+  return {
+    type: SET_NAV_HEADER,
+    payload: { text, tag }
   };
 }
