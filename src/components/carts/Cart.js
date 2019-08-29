@@ -32,7 +32,7 @@ class Cart extends Component {
 
 const mapStateToProps = ({ carts }, ownProps) => {
   return {
-    cart: carts[ownProps.match.params.id]
+    cart: ownProps.match && carts[ownProps.match.params.id]
   };
 };
 

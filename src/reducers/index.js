@@ -7,6 +7,7 @@ import CategoriesReducer from "./reducer_categories";
 import NavbarReducer from "./reducer_navbar";
 import ProductHintsReducer from "./reducer_productHints";
 import CurrentListNutrientsReducer from "./reducer_currentListNutrients";
+import CalendarReducer from "./reducer_calendar";
 
 const rootReducer = combineReducers({
   carts: CartsReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   currentNavHeader: NavbarReducer,
   form: formReducer,
   productHints: ProductHintsReducer,
-  currentListNutrients: CurrentListNutrientsReducer
+  currentListNutrients: CurrentListNutrientsReducer,
+  calendar: CalendarReducer
 });
 
 export default rootReducer;

@@ -7,22 +7,6 @@ import { deleteProduct, updateProductCount } from "../../actions";
 import PropTypes from "prop-types";
 
 class Product extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   // this.productShowDetails = React.createRef();
-  // }
-
-  componentDidMount() {
-    // console.log(typeof this.productShowDetails.current);
-    // this.productShowDetails.current.onClick = () => alert(2);
-    if (this.props.product.id === 0) {
-      alert("ERROR for test, ErrorBoundary");
-      throw new Error("TEST error");
-    }
-    console.log(typeof this.props.listID);
-    console.log(typeof this.props.categoryImg);
-    console.log(this.props.product);
-  }
 
   render() {
     const { product, categoryImg, listID, listType } = this.props;
