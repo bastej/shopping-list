@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cart actions should fetch info about product nutrients 1`] = `
+Object {
+  "claims": Array [
+    "Cholesterol Free",
+    "Low Cholesterol",
+    "Fat Free",
+    "Low Fat",
+    "Good Source of Fiber",
+    "Saturated Fat Free",
+    "Low Saturated Fat",
+    "Sodium Free",
+    "Very Low Sodium",
+    "Low Sodium",
+  ],
+  "common_type": null,
+  "food_name": "banana",
+  "full_nutrients": ArrayContaining [
+    ObjectContaining {
+      "attr_id": 203,
+    },
+    ObjectContaining {
+      "attr_id": 204,
+    },
+    ObjectContaining {
+      "attr_id": 205,
+    },
+    ObjectContaining {
+      "attr_id": 208,
+    },
+  ],
+  "locale": "en_US",
+  "photo": Object {
+    "thumb": "https://d2xdmhkmkbyw75.cloudfront.net/399_thumb.jpg",
+  },
+  "serving_qty": 1,
+  "serving_unit": "medium (7\\" to 7-7/8\\" long)",
+  "serving_weight_grams": 118,
+  "tag_id": "399",
+  "tag_name": "banana",
+}
+`;

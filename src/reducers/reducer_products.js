@@ -1,7 +1,7 @@
 import { ADD_CART_PRODUCT, ADD_MEAL_PRODUCT } from "../actions/types";
 import _ from "lodash";
 
-const INITIAL_PORDUCTS = {
+export const INITIAL_PRODUCTS = {
   0: {
     id: 0,
     name: "potato",
@@ -150,7 +150,7 @@ const INITIAL_PORDUCTS = {
   }
 };
 
-export default function(state = INITIAL_PORDUCTS, action) {
+export default function(state = INITIAL_PRODUCTS, action) {
   switch (action.type) {
     case ADD_CART_PRODUCT || ADD_MEAL_PRODUCT: {
       const index = _.size(state);
