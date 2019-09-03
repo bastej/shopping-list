@@ -8,7 +8,7 @@ import {
 
 import _ from "lodash";
 
-const INITIAL_CARTS = {
+export const INITIAL_CARTS = {
   0: {
     id: 0,
     type: "cart",

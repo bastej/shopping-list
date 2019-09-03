@@ -1,5 +1,6 @@
 import { createNewCart, updateProductCount, addProduct } from "./index.js";
 import { UPDATE_CART_PRODUCT_COUNT } from "./types";
+import axios from "axios";
 import { nutritionixAPI } from "../api/nutritionix";
 
 describe("cart actions", () => {
@@ -15,11 +16,10 @@ describe("cart actions", () => {
       });
     });
   });
-
-  it("should fetch info about product nutrients", async () => {
-    const mockedName = "banana";
-
-    try {
+  describe("API testing", () => {
+    it("should fetch from api info about 4 specific product nutrients", async () => {
+      const mockedName = "banana";
+      expect.assertions(1);
       const data = await nutritionixAPI.get("/search/instant/", {
         params: {
           common_general: true,
@@ -39,8 +39,17 @@ describe("cart actions", () => {
           // expect.objectContaining({ attr_id: 1208 })
         ])
       });
-    } catch (e) {
-      expect(e).toMatch("error");
-    }
+    });
   });
 });
+
+// if axios is mocked with below, nutritionixAPI doesn't work
+// jest.mock("axios");
+// it("action should receive object", async () => {
+//   const product = { name: "banana" };
+//   const mockedResponse = { data: product };
+//   axios.get.mockResolvedValue(mockedResponse);
+//   const response = await axios.get();
+
+//   expect(response.data).toEqual(product);
+// });

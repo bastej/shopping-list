@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`cart actions should fetch info about product nutrients 1`] = `
+exports[`cart actions API testing should fetch from api info about 4 specific product nutrients 1`] = `
 Object {
   "claims": Array [
     "Cholesterol Free",
